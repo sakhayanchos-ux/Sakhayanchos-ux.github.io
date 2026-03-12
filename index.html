@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>Анкета здоровья и питания | Herbalife</title>
     <style>
-        /* Все стили без изменений */
+        /* Все стили без изменений (такие же, как в предыдущей версии) */
         * {
             margin: 0;
             padding: 0;
@@ -365,16 +365,24 @@
             </div>
         </div>
 
+        <!-- НОВЫЙ БЛОК: МАРАФОН СТРОЙНОСТИ -->
+        <div class="field">
+            <label>🎽 Хотите участвовать в марафоне стройности от Сахаяны?</label>
+            <div class="radio-group">
+                <div class="radio-item"><input type="radio" name="marathon" value="Да, хочу участвовать" id="mar1"><label for="mar1">✅ Да, хочу участвовать</label></div>
+                <div class="radio-item"><input type="radio" name="marathon" value="Возможно, позже" id="mar2"><label for="mar2">⏳ Возможно, позже</label></div>
+                <div class="radio-item"><input type="radio" name="marathon" value="Нет, не интересуюсь" id="mar3"><label for="mar3">❌ Нет, не интересуюсь</label></div>
+            </div>
+        </div>
+
         <!-- КОНТАКТЫ -->
         <div class="row-2col">
             <div class="field">
                 <label>📞 Телефон (WhatsApp) для связи</label>
-                <!-- Плейсхолдер изменён на "номер" -->
                 <input type="tel" id="phone" placeholder="номер">
             </div>
             <div class="field">
                 <label>👤 Кто порекомендовал анкету?</label>
-                <!-- Плейсхолдер изменён на "ФИО" -->
                 <input type="text" id="invitedBy" placeholder="ФИО">
             </div>
         </div>
@@ -390,7 +398,7 @@
             </div>
         </div>
 
-        <!-- Блок выбора конкретных продуктов (обновлённый список) -->
+        <!-- Блок выбора конкретных продуктов -->
         <div class="field" id="productList" style="margin-top: 10px;">
             <label>📋 Выберите продукты (можно несколько):</label>
             <div class="checkbox-group">
@@ -416,7 +424,7 @@
             <span>📲</span> Отправить анкету консультанту
         </button>
 
-        <!-- КОНТАКТНАЯ ИНФОРМАЦИЯ (исправлено) -->
+        <!-- КОНТАКТНАЯ ИНФОРМАЦИЯ -->
         <div class="contact-info">
             <p class="name">Сахаяна • твой консультант</p>
             <p>+7 9142609616 • <span class="social">@Sakhayana_hlf</span></p>
@@ -461,6 +469,8 @@
         let experience = document.getElementById('experience').value;
         let discount = document.getElementById('discount').value;
         let income = getRadioValue('income');
+        // Новое поле
+        let marathon = getRadioValue('marathon');
         let phone = document.getElementById('phone').value.trim() || 'не указан';
         let invitedBy = document.getElementById('invitedBy').value.trim() || 'не указано';
 
@@ -493,7 +503,7 @@
         // Дата заполнения
         let currentDate = new Date().toLocaleDateString('ru-RU');
 
-        // Формирование сообщения с эмодзи
+        // Формирование сообщения с эмодзи (добавлена строка про марафон)
         let message = `📋 *Новая анкета* 📋\n\n`;
         message += `📅 *Дата заполнения:* ${currentDate}\n`;
         message += `👤 *Имя:* ${name}\n`;
@@ -516,6 +526,7 @@
         message += `📅 *Стаж Herbalife:* ${experience}\n`;
         message += `💰 *Текущая скидка:* ${discount}\n`;
         message += `💵 *Интерес к доходу:* ${income}\n`;
+        message += `🎽 *Марафон стройности:* ${marathon}\n`;  // новая строка
         message += `📞 *Телефон:* ${phone}\n`;
         message += `🤝 *Пригласил:* ${invitedBy}\n`;
         message += `🛒 *Желание приобрести:* ${purchaseText}\n`;
