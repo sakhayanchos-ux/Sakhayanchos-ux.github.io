@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#08b6ca">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="ЗАБУГОР 🌴">
+<meta name="description" content="Мой трекер Каникулы ЗАБУГОР: очки, цели, прогресс и мотивация для поездки в Таиланд.">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icon.svg" type="image/svg+xml">
+<title>Каникулы ЗАБУГОР — мой трекер</title>
+<style>
+:root{--navy:#0a2f55;--blue:#065e85;--teal:#00acaa;--aqua:#00cfd9;--orange:#ff7155;--cream:#fffef4;--mint:#e3ffef;--muted:#52758b}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--navy);font:500 16px/1.4 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:linear-gradient(180deg,#1badf4 0%,#95edfa 23%,#06cfcf 48%,#baffb4 100%);min-height:100vh}
+button,input,select{font:inherit}button{cursor:pointer;touch-action:manipulation}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #f5a629;outline-offset:2px}
+[hidden]{display:none!important}.screen{min-height:100dvh}.site-wrap{max-width:650px;margin:0 auto;padding:0 16px calc(38px + env(safe-area-inset-bottom))}
+.sky{position:absolute;inset:0 0 auto;height:350px;pointer-events:none;overflow:hidden;z-index:-1;background:radial-gradient(circle at 84% 15%,#fff5af 0,#ffdf5b 6%,transparent 16%),linear-gradient(180deg,#16aafa 0%,#72e5f2 62%,#21d1d1 100%)}
+.sky:before{content:"";position:absolute;left:-9%;right:-8%;bottom:-18px;height:160px;background:linear-gradient(170deg,#16618e,#0b998c 70%);clip-path:polygon(0% 68%,6% 25%,14% 60%,22% 14%,28% 55%,39% 26%,49% 75%,60% 24%,68% 59%,78% 10%,85% 52%,92% 26%,100% 69%,100% 100%,0 100%)}
+.sky:after{content:"";position:absolute;bottom:-12px;left:-10%;right:-10%;height:88px;background:linear-gradient(175deg,#0de2d7,#0095b8);clip-path:ellipse(71% 70% at 50% 95%)}
+.palm{position:absolute;top:0;z-index:1;pointer-events:none;font-size:118px;line-height:1;filter:drop-shadow(2px 5px 3px #02573b30)}.palm.left{left:-28px;transform:rotate(-30deg)}.palm.right{right:-27px;transform:scaleX(-1) rotate(-27deg)}
+.island-deco{position:relative;padding:58px 16px 14px;text-align:center;color:#fff;text-shadow:0 2px 12px #025c7d6b}
+.logo-top{font-size:13px;letter-spacing:2px;font-weight:900}.logo-big{font-size:clamp(48px,11.9vw,78px);letter-spacing:-3px;font-weight:1000;line-height:1.03;background:linear-gradient(180deg,#004b74 10%,#00a875 100%);background-clip:text;-webkit-background-clip:text;color:transparent;filter:drop-shadow(0 2px 1px #fff7)}
+.tagline{font-weight:800;letter-spacing:.6px;font-size:15px;color:#04365f;text-shadow:0 1px 10px #ffffffba}.welcome-content{position:relative;max-width:550px;margin:44px auto 0}
+.glass{border:1px solid #ffffffeb;box-shadow:0 16px 38px #01527e29;border-radius:26px;background:#fffffff0;backdrop-filter:blur(8px)}
+.welcome-head{text-align:center;padding:24px 16px 10px}.welcome-head h1{font-size:29px;line-height:1.12;margin:0 0 9px}.welcome-head p{margin:0;color:#477188;font-weight:550}
+.level-list{padding:13px;display:grid;gap:13px}.level{border:none;text-align:left;border-radius:23px;padding:20px 21px;position:relative;display:block;width:100%;box-shadow:0 8px 20px #004d7730;transition:transform .18s,box-shadow .18s}.level:active{transform:scale(.98)}.level-basic{background:linear-gradient(120deg,#fff9e6,#fff1da 56%,#ffd0b8)}.level-plus{background:linear-gradient(120deg,#e5ffff,#d3faff 55%,#bde6ff)}.level small{display:block;color:var(--navy);font-size:11px;letter-spacing:1.1px;font-weight:850}.level strong{display:block;font-size:39px;line-height:1.1;font-weight:1000;color:#f2633f}.level-plus strong{color:#006f9d}.level .goal{display:block;font-weight:800;color:#154d68;margin-top:4px}.level .explainer{display:block;font-size:12px;color:#526f82;margin-top:8px;max-width:90%;line-height:1.35}.level .arrow{position:absolute;right:16px;top:20px;border-radius:50%;width:34px;height:34px;background:#ffffffaa;text-align:center;font-size:21px;line-height:33px;color:#0e6480}
+.small-foot{font-size:12px;color:#164f65;text-align:center;margin:17px auto 30px;max-width:410px;font-weight:650}
+.track-head{position:relative;min-height:245px;color:#fff;padding:22px 0 22px;text-align:center;text-shadow:0 2px 8px #00486060}.track-head .eyebrow{font-size:13px;font-weight:900;letter-spacing:1.1px}.track-head h1{font-size:42px;letter-spacing:-1px;margin:4px 0 0;line-height:1.05}.track-head h1 span{color:#fff5b5}.track-head p{margin:12px auto;max-width:305px;font-size:14px;font-weight:700}.top-row{display:flex;align-items:center;justify-content:space-between}.ghost{border:1px solid #ffffffb8;border-radius:30px;background:#ffffff4d;color:#fff;font-size:13px;font-weight:850;padding:8px 13px;backdrop-filter:blur(4px)}.level-pill{padding:8px 13px;border-radius:999px;background:#ffffffed;color:#025c7a;font-weight:950;font-size:12px;text-shadow:none}
+.card{background:#fffefa;border-radius:23px;padding:19px;margin:13px 0;box-shadow:0 10px 23px #005c7f21;border:1px solid #ffffffdf}
+.main-panel{position:relative;margin-top:-42px;background:linear-gradient(135deg,#fffefa,#fff4dc)}.panel-label{display:flex;align-items:center;justify-content:space-between;gap:8px;color:var(--muted);font-size:12px;font-weight:900;letter-spacing:.5px;text-transform:uppercase}
+.month-choose{appearance:none;max-width:150px;border:1px solid #b4e4e1;background:#ffffffbd;color:#06466c;border-radius:12px;font-size:14px;font-weight:800;padding:9px 10px}
+.big-count{font-size:47px;font-weight:1000;line-height:1.1;letter-spacing:-1.4px;margin:10px 0 7px}.big-count small{font-size:18px;color:var(--muted);letter-spacing:0}
+.progress{height:14px;background:#d7e9e8;box-shadow:inset 0 1px 3px #154b6b17;border-radius:30px;overflow:hidden;margin:9px 0}.progress>div{height:100%;border-radius:30px;background:linear-gradient(90deg,#00b9bc,#46d66a);transition:width .4s;min-width:0}
+.progress.tiny{height:8px;margin:6px 0 0}.progress.tiny>div{background:linear-gradient(90deg,#00bdd1,#20d989)}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:15px 0}.stat{background:white;border-radius:15px;padding:14px;box-shadow:0 3px 9px #004c6210}.stat .number{display:block;font-size:23px;font-weight:1000}.stat .hint{font-size:11px;color:#517c90;font-weight:750}.daily-goal{font-size:13px;color:#0f5b70;font-weight:750;border-radius:13px;background:#e4fbeb;padding:12px;margin-top:12px}
+.motivation{border-radius:18px;color:#ffffff;background:linear-gradient(118deg,#008c9d,#025483);font-size:15px;font-weight:850;padding:15px 17px;margin:12px 0}.motivation b{color:#fff3af}
+.card h2{font-size:21px;margin:0 0 12px;line-height:1.2}.help{font-size:12px;color:#648295;margin:-3px 0 15px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}label.field{display:block;color:#42677b;font-size:12px;font-weight:800;margin:8px 0}.field input{display:block;width:100%;height:44px;padding:10px;border:1px solid #c7dfe0;border-radius:11px;background:#fff;color:#073a5a;margin-top:6px;min-width:0;font-size:15px}.field-full{grid-column:1 / -1}.primary{background:linear-gradient(110deg,#ff8a3d,#ff5f55);border:0;border-radius:14px;color:#fff;font-weight:950;padding:14px 18px;box-shadow:0 6px 15px #f36b4359;width:100%;margin-top:10px;font-size:16px}.primary:active{transform:scale(.99)}.secondary{background:#e6f9fa;border:1px solid #a9e1e4;color:#07637c;border-radius:12px;font-weight:850;padding:11px 13px}.entry-list{display:grid;gap:8px}.entry{background:#f1fcf9;border:1px solid #d8f4eb;border-radius:13px;padding:10px 12px;display:flex;justify-content:space-between;align-items:center;gap:10px}.entry strong{font-size:18px;color:#00738a}.entry .date{font-size:12px;color:#58768a}.entry .note{font-size:12px;color:#3d6778;margin-top:2px;word-break:break-word}.delete{border:0;background:#ffe6e2;color:#cc4b40;border-radius:9px;padding:7px 10px;font-size:13px;font-weight:900}.empty{background:#f0fbf9;border-radius:12px;padding:18px;text-align:center;color:#57808e;font-size:13px}
+.month-list{display:grid;gap:9px}.month-line{width:100%;text-align:left;border:1px solid #dbece8;background:#f8fffb;border-radius:13px;padding:12px 13px}.month-line.selected{border:2px solid #00a8b9;padding:11px 12px;background:#eafffa}.month-top{display:flex;align-items:center;justify-content:space-between;font-size:14px;gap:6px}.month-top strong{color:#123f63}.month-top span{font-size:12px;color:#51788c}.month-bottom{display:flex;align-items:center;justify-content:space-between;font-size:11px;color:#5c7e87;margin-top:7px}.status-done{color:#168b56!important;font-weight:900}.status-progress{color:#bb8500!important;font-weight:900}.status-wait{color:#91a2a8!important}
+.reminders{background:linear-gradient(130deg,#faffec,#e3faff)}.reminders h2{margin-bottom:7px}.reminder-times{display:grid;grid-template-columns:1fr 1fr;gap:12px}.reminder-times input{background:white;width:100%;border:1px solid #b7e4e2;border-radius:12px;padding:8px 9px;margin-top:5px;color:#164a63;font-weight:800}
+.note-box{font-size:12px;color:#416a80;line-height:1.45;margin:11px 0 0}.note-box b{color:#08496c}
+.actions{display:flex;gap:8px;flex-wrap:wrap}.actions .secondary{flex:1;font-size:13px}.footer{text-align:center;color:#0b5c75;font-size:12px;font-weight:700;margin:20px 0 5px}.toast{position:fixed;bottom:calc(20px + env(safe-area-inset-bottom));left:50%;transform:translate(-50%,30px);opacity:0;pointer-events:none;z-index:20;background:#073954;color:white;border-radius:14px;padding:13px 18px;box-shadow:0 8px 25px #012c5370;width:max-content;max-width:90vw;font-weight:850;transition:all .22s}.toast.show{opacity:1;transform:translate(-50%,0)}
+hr{border:0;border-top:1px solid #e1efec;margin:16px 0}
+@media(min-width:600px){.site-wrap{padding-inline:25px}.welcome-content{margin-top:65px}.track-head{min-height:265px}.logo-big{font-size:82px}.track-head h1{font-size:51px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="sky" aria-hidden="true"></div>
+<div class="palm left" aria-hidden="true">🌴</div><div class="palm right" aria-hidden="true">🌴</div>
+<section id="welcome" class="screen">
+ <div class="site-wrap">
+  <header class="island-deco">
+   <div class="logo-top">КАНИКУЛЫ</div><div class="logo-big">ЗАБУГОР</div>
+   <div class="tagline">🌞 ТВОЙ БИЛЕТ В ТАИЛАНД 🌞</div>
+  </header>
+  <div class="welcome-content glass">
+   <div class="welcome-head"><div style="font-size:33px">🏝️ ✈️ 🌺</div><h1>Какую вершину<br>будем покорять?</h1><p>Выбери свой уровень. Дальше — твой личный трекер очков и путь к морю!</p></div>
+   <div class="level-list">
+    <button type="button" class="level level-basic" data-level="BASIC"><small>УРОВЕНЬ</small><strong>BASIC</strong><span class="goal">12 500 очков · 8 месяцев</span><span class="explainer">Для тех, кто ни разу не делал 1500 очков и больше в мае–сентябре.</span><span class="arrow">➜</span></button>
+    <button type="button" class="level level-plus" data-level="PLUS"><small>УРОВЕНЬ</small><strong>PLUS</strong><span class="goal">26 500 очков · 8 месяцев</span><span class="explainer">Для Супервайзоров и WT, которые делали 1500 и больше. +2 дня и +1 экскурсия!</span><span class="arrow">➜</span></button>
+   </div>
+  </div>
+  <div class="small-foot">🌺 Каждый записанный балл приближает тебя к мечте.<br>Твои записи сохраняются на этом устройстве.</div>
+ </div>
+</section>
+
+<section id="tracker" class="screen" hidden>
+ <div class="site-wrap">
+  <header class="track-head">
+   <div class="top-row"><button id="changeLevel" class="ghost" type="button">← Уровень</button><span id="levelBadge" class="level-pill">BASIC</span></div>
+   <div style="font-size:29px;margin-top:17px">🌴 🇹🇭 ✈️</div>
+   <div class="eyebrow">КАНИКУЛЫ</div><h1>ЗАБУГОР <span>☀</span></h1>
+   <p>Просыпайся! Нас ждёт Таиланд. Каждое очко — ещё один шаг к пляжу! 🌊</p>
+  </header>
+  <main>
+   <section class="card main-panel">
+    <div class="panel-label"><span>МОЙ ПЛАН НА МЕСЯЦ</span><select id="monthSelect" class="month-choose" aria-label="Месяц"></select></div>
+    <div class="big-count"><span id="monthDone">0</span> <small>/ <span id="monthGoal">500</span> очков</small></div>
+    <div class="progress" role="progressbar" aria-label="Прогресс за месяц" aria-valuemin="0" aria-valuemax="100"><div id="monthBar" style="width:0%"></div></div>
+    <div class="panel-label"><span id="monthPercent">0% выполнено</span><span id="monthState">Вперёд!</span></div>
+    <div class="stats">
+     <div class="stat"><span class="hint">ОСТАЛОСЬ В ЭТОМ МЕСЯЦЕ</span><span id="monthLeft" class="number">500</span><span class="hint">очков до цели</span></div>
+     <div class="stat"><span class="hint">ЗА ВСЁ ПРОМО</span><span id="overallDone" class="number">0</span><span class="hint">из <span id="overallGoal">12 500</span> очков</span></div>
+    </div>
+    <div class="progress tiny" role="progressbar" aria-label="Прогресс за всё промо"><div id="overallBar" style="width:0%"></div></div>
+    <div id="overallRemaining" class="help" style="margin-top:7px;margin-bottom:0">Осталось 12 500 очков до общей цели</div>
+    <div id="dailyGoal" class="daily-goal">🎯 Запиши первые очки!</div>
+    <div class="motivation">💌 <b>Твоё напоминание:</b><div id="motivationText" style="margin-top:5px">Сколько очков ты сделала сегодня?</div></div>
+   </section>
+   <section class="card">
+    <h2>✍🏻 Записать очки</h2><p class="help">Каждая запись попадёт в нужный месяц. Очки общие — при смене BASIC/PLUS они сохраняются.</p>
+    <form id="entryForm">
+     <div class="form-grid">
+      <label class="field">Дата<input type="date" id="entryDate" required min="2026-10-01" max="2027-05-31"></label>
+      <label class="field">Сколько очков?<input type="number" id="entryPoints" min="0.01" max="100000" step="0.01" placeholder="Например, 125" inputmode="decimal" required></label>
+      <label class="field field-full">За что? (необязательно)<input id="entryNote" type="text" maxlength="100" placeholder="Например: клиент, заказ, новый партнёр"></label>
+     </div>
+     <button class="primary" type="submit">＋ Добавить очки к цели</button>
+    </form>
+   </section>
+   <section class="card"><h2>🗓️ Путь к Таиланду</h2><p class="help">Нажми на месяц, чтобы увидеть записи и план.</p><div id="monthList" class="month-list"></div></section>
+   <section class="card"><h2>📒 Мои записи — <span id="historyMonth">октябрь</span></h2><div id="history" class="entry-list"></div></section>
+   <section class="card reminders">
+    <h2>🔔 Напоминания с мотивацией</h2>
+    <p class="help">Чтобы iPhone напоминал, даже когда сайт закрыт, добавь события в календарь. Утром — вдохновение, вечером — вопрос об очках.</p>
+    <div class="reminder-times">
+     <label class="field">🌅 Утром<input type="time" id="morningTime" value="05:30"></label>
+     <label class="field">🌙 Вечером<input type="time" id="eveningTime" value="20:30"></label>
+    </div>
+    <button type="button" id="downloadIcs" class="primary">🔔 Добавить напоминания в календарь</button>
+    <p class="note-box"><b>Как включить:</b> нажми кнопку, открой скачанный файл «zabugor-napominaniya.ics» и добавь события в Календарь. Разреши уведомления Календаря в настройках iPhone. Повторное добавление создаст дубликаты — если меняешь время, удали старые события.</p>
+   </section>
+   <section class="card">
+    <h2>💾 Мои данные</h2><p class="help">Записи хранятся только в браузере этого телефона. Для подстраховки можно скачать копию — при очистке браузера записи могут пропасть.</p>
+    <div class="actions"><button id="exportData" class="secondary" type="button">⬇️ Сохранить копию</button><button id="importDataBtn" class="secondary" type="button">⬆️ Восстановить копию</button></div><input type="file" id="importData" accept=".json,application/json" hidden>
+   </section>
+  </main>
+  <div class="footer">🌴 Таиланд становится ближе с каждым днём! 💚<br>Только ты, твой план и твоя мечта.</div>
+ </div>
+</section>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+(function(){
+"use strict";
+var names=["Октябрь","Ноябрь","Декабрь","Январь","Февраль","Март","Апрель","Май"];
+var keys=["2026-10","2026-11","2026-12","2027-01","2027-02","2027-03","2027-04","2027-05"];
+var goals={BASIC:[500,500,1000,1500,1500,2500,2500,2500],PLUS:[2000,2500,2500,2500,3500,3500,5000,5000]};
+var morningWords=["Просыпайся! Нас ждёт Таиланд! 🌴","Новый день — новый шаг к морю! ☀️","Твоя мечта ближе, чем вчера. Действуй! ✈️","Доброе утро! Кого сегодня пригласишь? 💚","Таиланд не за горами. Сделай свой объём! 🌊","Представь море и сделай первый шаг! 🏝️","Сегодня отличный день для новых очков! 🌺"];
+var eveningWords=["Сколько очков ты сделала сегодня? 💪","Записала сегодняшний объём в трекер? ✍️","Что сегодня приблизило тебя к Таиланду? ✨","Проверь: сколько очков осталось до цели? 🎯","Даже маленький результат имеет значение! 🌴","Какой объём ты сделала за день? 💚","Сегодняшние очки внесены? Ты молодец! ☀️"];
+var motivational=["Сколько очков ты сделала сегодня? 💪","Просыпайся, нас ждёт Таиланд! 🌴","Кокос, море, солнце — всё ближе! 🥥","Не жди идеального дня — делай очки сегодня! ✈️","Один заказ сегодня — шаг навстречу мечте. 💚","Ты строишь маршрут в Таиланд своими действиями! 🌊","Каждый день спрашивай себя: что я сделала ради цели? ☀️","Твоя цель заслуживает твоих действий. 🌺"];
+var storageKey="zabugor_travel_2026_tracker_v1";
+var state={level:null,month:null,entries:[],morning:"05:30",evening:"20:30"};
+try{var parsed=JSON.parse(localStorage.getItem(storageKey)||"null");if(parsed&&typeof parsed==="object"){state.entries=Array.isArray(parsed.entries)?parsed.entries.filter(function(e){return e&&typeof e.date==="string"&&keys.indexOf(e.date.slice(0,7))>-1&&Number(e.points)>0}).map(function(e){return {id:String(e.id||Date.now()+Math.random()),date:e.date,points:Number(e.points),note:String(e.note||"").slice(0,100)}}):[];if(["BASIC","PLUS"].indexOf(parsed.level)>-1)state.level=parsed.level;if(keys.indexOf(parsed.month)>-1)state.month=parsed.month;if(/^\d{2}:\d{2}$/.test(parsed.morning||""))state.morning=parsed.morning;if(/^\d{2}:\d{2}$/.test(parsed.evening||""))state.evening=parsed.evening;}}catch(e){}
+var $=function(id){return document.getElementById(id)};
+function save(){try{localStorage.setItem(storageKey,JSON.stringify(state));}catch(e){toast("Нет доступа к памяти браузера. Сделай резервную копию.");}}
+function sum(arr){return arr.reduce(function(a,b){return a+Number(b||0)},0);}
+function fmt(n){return Number((n||0).toFixed(2)).toLocaleString("ru-RU",{maximumFractionDigits:2});}
+function totalFor(m){return sum(state.entries.filter(function(e){return e.date.slice(0,7)===m}).map(function(e){return e.points}));}
+function total(){return sum(state.entries.map(function(e){return e.points}));}
+function pctr(a,b){return b?Math.min(100,Math.round(a/b*100)):0;}
+function toast(s){var t=$("toast");t.textContent=s;t.classList.add("show");clearTimeout(toast.t);toast.t=setTimeout(function(){t.classList.remove("show");},3200);}
+function todayISO(){var now=new Date();return now.getFullYear()+"-"+String(now.getMonth()+1).padStart(2,"0")+"-"+String(now.getDate()).padStart(2,"0");}
+function chooseMonth(){var today=todayISO().slice(0,7);return keys.indexOf(today)>-1?today:(today<keys[0]?keys[0]:keys[7]);}
+function chooseLevel(level){state.level=level;state.month=state.month||chooseMonth();save();$("welcome").hidden=true;$("tracker").hidden=false;window.scrollTo(0,0);render();}
+document.querySelectorAll("[data-level]").forEach(function(b){b.addEventListener("click",function(){chooseLevel(b.getAttribute("data-level"));});});
+$("changeLevel").addEventListener("click",function(){$("tracker").hidden=true;$("welcome").hidden=false;window.scrollTo(0,0);});
+$("monthSelect").addEventListener("change",function(){state.month=this.value;save();render();});
+function render(){
+if(!state.level)return;
+var gs=goals[state.level], idx=Math.max(0,keys.indexOf(state.month)), target=gs[idx], earned=totalFor(keys[idx]), goalTotal=sum(gs), earnedTotal=total();
+$("levelBadge").textContent="УРОВЕНЬ "+state.level;
+$("monthSelect").innerHTML="";names.forEach(function(n,i){var o=document.createElement("option");o.value=keys[i];o.textContent=n+" "+keys[i].slice(0,4);$("monthSelect").appendChild(o);});$("monthSelect").value=state.month;
+$("monthDone").textContent=fmt(earned);$("monthGoal").textContent=fmt(target);$("monthLeft").textContent=fmt(Math.max(0,target-earned));$("monthPercent").textContent=fmt(Math.round(earned/target*100))+"% выполнено";$("monthState").textContent=earned>=target?"✅ Цель выполнена!":earned>0?"🔥 Продолжаем!":"🚀 Начинаем!";
+$("monthBar").style.width=pctr(earned,target)+"%";$("monthBar").parentNode.setAttribute("aria-valuenow",pctr(earned,target));
+$("overallDone").textContent=fmt(earnedTotal);$("overallGoal").textContent=fmt(goalTotal);
+$("overallRemaining").textContent=earnedTotal>=goalTotal?"🎉 Общая сумма целей набрана! Проверь выполнение каждого месяца.":"Осталось "+fmt(Math.max(0,goalTotal-earnedTotal))+" очков до общей суммы целей";
+$("overallBar").style.width=pctr(earnedTotal,goalTotal)+"%";
+$("overallBar").parentNode.setAttribute("aria-valuenow",pctr(earnedTotal,goalTotal));
+var thisMonth=todayISO().slice(0,7), today=new Date(), selectedDate=new Date(keys[idx]+"-01T12:00:00");
+var days=new Date(selectedDate.getFullYear(),selectedDate.getMonth()+1,0).getDate(), daysLeft=state.month===thisMonth?Math.max(1,days-today.getDate()+1):state.month>thisMonth?days:0;
+$("dailyGoal").textContent=earned>=target?"🏆 Отлично! План этого месяца выполнен. Продолжай!":daysLeft>0?"🎯 Осталось "+fmt(target-earned)+" очков. Примерно "+fmt(Math.ceil((target-earned)/daysLeft))+" очков в день до конца "+names[idx].toLowerCase()+ "я.".replace("яя","я"): "📅 Месяц завершён. Посмотри результат и двигайся дальше!";
+$("motivationText").textContent=motivational[(new Date().getDate()+idx)%motivational.length];
+$("historyMonth").textContent=names[idx].toLowerCase();
+renderMonths(gs);renderHistory();
+$("morningTime").value=state.morning;$("eveningTime").value=state.evening;
+}
+function renderMonths(gs){var el=$("monthList");el.innerHTML="";keys.forEach(function(k,i){var done=totalFor(k), g=gs[i], pct=pctr(done,g), status=done>=g?"Выполнено":done>0?"В процессе":"Ждёт тебя";
+var cls=done>=g?"status-done":done>0?"status-progress":"status-wait";var btn=document.createElement("button");btn.type="button";btn.className="month-line"+(state.month===k?" selected":"");
+btn.innerHTML='<div class="month-top"><strong>'+names[i]+' '+k.slice(0,4)+'</strong><span>'+fmt(done)+' / '+fmt(g)+'</span></div><div class="progress tiny"><div style="width:'+pct+'%"></div></div><div class="month-bottom"><span class="'+cls+'">'+status+'</span><span>'+Math.round(done/g*100)+'% · осталось '+fmt(Math.max(0,g-done))+'</span></div>';
+btn.addEventListener("click",function(){state.month=k;save();render();document.querySelector(".main-panel").scrollIntoView({behavior:"smooth",block:"start"});});el.appendChild(btn);
+});}
+function renderHistory(){var el=$("history");el.innerHTML="";var list=state.entries.filter(function(e){return e.date.slice(0,7)===state.month}).slice().sort(function(a,b){return b.date.localeCompare(a.date)});
+if(!list.length){var empty=document.createElement("div");empty.className="empty";empty.textContent="Пока записей нет. Добавь свои первые очки! 🌺";el.appendChild(empty);return;}
+list.forEach(function(e){var line=document.createElement("div");line.className="entry";
+var info=document.createElement("div"),sumEl=document.createElement("strong"),date=document.createElement("div");sumEl.textContent="+"+fmt(e.points)+" очков";date.className="date";date.textContent=e.date.split("-").reverse().join(".");info.appendChild(sumEl);info.appendChild(date);if(e.note){var n=document.createElement("div");n.className="note";n.textContent=e.note;info.appendChild(n);}
+var del=document.createElement("button");del.type="button";del.className="delete";del.textContent="✕";del.title="Удалить запись";del.setAttribute("aria-label","Удалить "+fmt(e.points)+" очков за "+e.date);del.addEventListener("click",function(){if(confirm("Удалить запись на "+fmt(e.points)+" очков?")){state.entries=state.entries.filter(function(x){return x.id!==e.id});save();render();toast("Запись удалена");}});line.appendChild(info);line.appendChild(del);el.appendChild(line);});}
+$("entryDate").value=todayISO()>"2027-05-31"?"2027-05-31":todayISO()<"2026-10-01"?"2026-10-01":todayISO();
+$("entryForm").addEventListener("submit",function(ev){ev.preventDefault();var dt=$("entryDate").value,pt=Number($("entryPoints").value),note=$("entryNote").value.trim();if(!/^\d{4}-\d{2}-\d{2}$/.test(dt)||keys.indexOf(dt.slice(0,7))<0){toast("Выбери дату с октября 2026 по май 2027");return;}if(!Number.isFinite(pt)||pt<=0||pt>100000){toast("Введи положительное количество очков");return;}var id=String(Date.now())+"-"+Math.random().toString(36).slice(2);state.entries.push({id:id,date:dt,points:pt,note:note});state.month=dt.slice(0,7);save();render();$("entryPoints").value="";$("entryNote").value="";toast("+"+fmt(pt)+" очков! Таиланд всё ближе! 🌴");});
+function escapeICS(s){return String(s).replace(/\\/g,"\\\\").replace(/\r?\n/g,"\\n").replace(/;/g,"\\;").replace(/,/g,"\\,");}
+function stamp(d){return d.getFullYear()+String(d.getMonth()+1).padStart(2,"0")+String(d.getDate()).padStart(2,"0")+"T"+String(d.getHours()).padStart(2,"0")+String(d.getMinutes()).padStart(2,"0")+"00";}
+function asUtc(d){return d.getUTCFullYear()+String(d.getUTCMonth()+1).padStart(2,"0")+String(d.getUTCDate()).padStart(2,"0")+"T"+String(d.getUTCHours()).padStart(2,"0")+String(d.getUTCMinutes()).padStart(2,"0")+String(d.getUTCSeconds()).padStart(2,"0")+"Z";}
+function download(filename,contents,type){var blob=new Blob([contents],{type:type}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download=filename;document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(url);},1500);}
+function calendarICS(){var now=new Date(), promoEnd=new Date(2027,4,31,23,59,59),start=new Date(Math.max(now.getTime(),new Date(2026,9,1).getTime())),lines=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//ZABUGOR//Travel Tracker//RU","CALSCALE:GREGORIAN","METHOD:PUBLISH","X-WR-CALNAME:ЗАБУГОР — мотивация","X-WR-CALDESC:Напоминания о целях и очках"];
+var dayCodes=["SU","MO","TU","WE","TH","FR","SA"];
+[{t:state.morning,words:morningWords,prefix:"🌴 Утро: "},{t:state.evening,words:eveningWords,prefix:"🌙 Вечер: "}].forEach(function(item){var hm=item.t.split(":").map(Number);for(var i=0;i<7;i++){var first=new Date(start.getFullYear(),start.getMonth(),start.getDate(),hm[0],hm[1]);first.setDate(first.getDate()+(i-first.getDay()+7)%7);if(first<start)first.setDate(first.getDate()+7);if(first>promoEnd)continue;var count=1+Math.floor((promoEnd.getTime()-first.getTime())/(7*86400000));var msg=item.words[i];var end=new Date(first.getTime()+10*60000);lines.push("BEGIN:VEVENT","UID:zabugor-"+i+"-"+hm.join("")+"-"+Date.now()+"@sakhayanchos","DTSTAMP:"+asUtc(now),"DTSTART:"+stamp(first),"DTEND:"+stamp(end),"RRULE:FREQ=WEEKLY;BYDAY="+dayCodes[i]+";COUNT="+count,"SUMMARY:"+escapeICS(item.prefix+msg),"DESCRIPTION:"+escapeICS("Каникулы ЗАБУГОР. Открой трекер и сделай ещё один шаг к поездке в Таиланд!"),"BEGIN:VALARM","ACTION:DISPLAY","DESCRIPTION:"+escapeICS(msg),"TRIGGER:PT0M","END:VALARM","END:VEVENT");}});lines.push("END:VCALENDAR");return lines.join("\r\n")+"\r\n";}
+$("morningTime").addEventListener("change",function(){state.morning=this.value;save();});
+$("eveningTime").addEventListener("change",function(){state.evening=this.value;save();});
+$("downloadIcs").addEventListener("click",function(){if(!state.morning||!state.evening){toast("Укажи время напоминаний");return;}download("zabugor-napominaniya.ics",calendarICS(),"text/calendar;charset=utf-8");toast("Файл календаря готов. Открой его и добавь события 🔔");});
+$("exportData").addEventListener("click",function(){download("zabugor-moi-ochki.json",JSON.stringify({app:"ЗАБУГОР",version:1,exportedAt:new Date().toISOString(),level:state.level,month:state.month,entries:state.entries,morning:state.morning,evening:state.evening},null,2),"application/json;charset=utf-8");toast("Копия данных сохранена 💚");});
+$("importDataBtn").addEventListener("click",function(){$("importData").click();});
+$("importData").addEventListener("change",function(){var f=this.files&&this.files[0];if(!f)return;var reader=new FileReader();reader.onload=function(){try{var d=JSON.parse(reader.result);if(!d||!Array.isArray(d.entries))throw Error("Нет записей");var valid=d.entries.filter(function(e){return e&&typeof e.date==="string"&&keys.indexOf(e.date.slice(0,7))>-1&&Number(e.points)>0}).map(function(e){return{id:String(e.id||Date.now()+Math.random()),date:e.date,points:Number(e.points),note:String(e.note||"").slice(0,100)}});if(confirm("Восстановить "+valid.length+" записей из копии? Текущие записи будут заменены.")){state.entries=valid;if(["BASIC","PLUS"].indexOf(d.level)>-1)state.level=d.level;state.month=keys.indexOf(d.month)>-1?d.month:chooseMonth();save();render();toast("Копия восстановлена ✅");}}catch(err){toast("Не удалось прочитать файл копии");}};reader.readAsText(f);this.value="";});
+if("serviceWorker" in navigator&&location.protocol==="https:"){window.addEventListener("load",function(){navigator.serviceWorker.register("./sw.js").catch(function(){});});}
+})();
+</script>
+</body>
+</html>
