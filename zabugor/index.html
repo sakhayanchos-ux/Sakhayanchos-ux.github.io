@@ -76,6 +76,18 @@ body{margin:0;background:linear-gradient(180deg,#1ab3ed 0%,#60dbec 34%,#00bfc8 1
 .screen{width:100%;max-width:none;margin:0 auto}
 .site-wrap{box-sizing:border-box;width:100%;max-width:650px;margin-left:auto;margin-right:auto;padding-left:16px;padding-right:16px}
 @media(min-width:651px){.site-wrap{max-width:650px}.sky{width:100vw}}
+
+/* v14: prevent sideways panning and center all mobile app content */
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0!important;width:100%!important;max-width:100%!important;overflow-x:clip!important}
+.screen{width:100%!important;max-width:100%!important;overflow-x:clip}
+.site-wrap{width:100%!important;max-width:650px!important;min-width:0!important;margin-inline:auto!important;padding-inline:16px!important}
+.sky{width:100%!important;left:0!important;right:0!important;overflow:hidden!important}
+@media(max-width:650px){
+.site-wrap{max-width:100%!important}
+.island-deco,.welcome-card,.track-head,.main-panel{max-width:100%!important;min-width:0}
+.welcome-card{margin-left:auto!important;margin-right:auto!important}
+}
 </style>
 </head>
 <body>
