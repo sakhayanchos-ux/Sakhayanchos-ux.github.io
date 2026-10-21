@@ -88,6 +88,15 @@ html,body{margin:0!important;width:100%!important;max-width:100%!important;overf
 .island-deco,.welcome-card,.track-head,.main-panel{max-width:100%!important;min-width:0}
 .welcome-card{margin-left:auto!important;margin-right:auto!important}
 }
+
+/* v15: equal left/right gutters on every screen */
+html,body{width:100%;max-width:100%;margin:0;overflow-x:hidden}
+.screen{width:100%;max-width:100%;margin:0 auto;overflow-x:hidden}
+.site-wrap{box-sizing:border-box!important;width:100%!important;max-width:650px!important;margin-left:auto!important;margin-right:auto!important;padding-left:16px!important;padding-right:16px!important}
+.site-wrap>*{max-width:100%;min-width:0}
+.welcome-card,.main-panel,.track-head{width:100%;max-width:100%;margin-left:auto;margin-right:auto}
+.sky{left:0;right:0;width:100%;max-width:100%}
+@media(max-width:430px){.site-wrap{padding-left:16px!important;padding-right:16px!important}}
 </style>
 </head>
 <body>
