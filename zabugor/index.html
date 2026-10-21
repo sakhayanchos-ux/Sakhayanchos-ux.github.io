@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#08b6ca">
+<meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="ЗАБУГОР 2">
@@ -42,6 +43,9 @@ button,input,select{font:inherit}button{cursor:pointer;touch-action:manipulation
 .note-box{font-size:12px;color:#416a80;line-height:1.45;margin:11px 0 0}.note-box b{color:#08496c}
 .actions{display:flex;gap:8px;flex-wrap:wrap}.actions .secondary{flex:1;font-size:13px}.footer{text-align:center;color:#0b5c75;font-size:12px;font-weight:700;margin:20px 0 5px}.toast{position:fixed;bottom:calc(20px + env(safe-area-inset-bottom));left:50%;transform:translate(-50%,30px);opacity:0;pointer-events:none;z-index:20;background:#073954;color:white;border-radius:14px;padding:13px 18px;box-shadow:0 8px 25px #012c5370;width:max-content;max-width:90vw;font-weight:850;transition:all .22s}.toast.show{opacity:1;transform:translate(-50%,0)}
 hr{border:0;border-top:1px solid #e1efec;margin:16px 0}
+.android-install{border:1px solid #c4eee4;background:linear-gradient(135deg,#fffdea,#e8fff9);border-radius:20px;padding:16px 18px;margin:16px auto;color:#0a4260;box-shadow:0 8px 20px #015f7c16;max-width:550px}
+.android-install h2{font-size:18px;line-height:1.2;margin:0 0 7px}.android-install p{font-size:13px;line-height:1.5;margin:0;color:#3a667b}.android-install .installAndroidBtn{display:block;width:100%;margin:12px 0 8px;background:linear-gradient(125deg,#008e99,#00946c);color:#fff;border:0;border-radius:13px;padding:12px;font-weight:900}
+.android-install .install-tip{font-size:12px;margin-top:9px}
 @media(min-width:600px){.site-wrap{padding-inline:25px}.welcome-content{margin-top:65px}.track-head{min-height:340px}.logo-big{font-size:82px}.track-head h1{font-size:51px}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
 </style>
@@ -62,6 +66,7 @@ hr{border:0;border-top:1px solid #e1efec;margin:16px 0}
     <button type="button" class="level level-plus" data-level="PLUS"><small>УРОВЕНЬ</small><strong>PLUS</strong><span class="goal">26 500 очков · 8 месяцев</span><span class="explainer">Для Супервайзоров и WT, которые делали 1500 и больше. +2 дня и +1 экскурсия!</span><span class="arrow">➜</span></button>
    </div>
   </div>
+  <div class="android-install" hidden><h2>📲 Установи «ЗАБУГОР 2» на Android</h2><p>Добавь трекер на главный экран телефона — он будет открываться как приложение.</p><button class="installAndroidBtn" type="button" hidden>📲 Установить приложение</button><p class="install-tip">Если кнопки нет: открой сайт в Google Chrome → нажми ⋮ вверху справа → «Установить приложение» или «Добавить на главный экран».</p></div>
   <div class="small-foot">🌺 Каждый записанный балл приближает тебя к мечте.<br>Твои записи сохраняются на этом устройстве.</div>
  </div>
 </section>
@@ -104,14 +109,15 @@ hr{border:0;border-top:1px solid #e1efec;margin:16px 0}
    <section class="card"><h2>📒 Мои записи — <span id="historyMonth">октябрь</span></h2><div id="history" class="entry-list"></div></section>
    <section class="card reminders">
     <h2>🔔 Напоминания с мотивацией</h2>
-    <p class="help">Чтобы iPhone напоминал, даже когда сайт закрыт, добавь события в календарь. Утром — вдохновение, вечером — вопрос об очках.</p>
+    <p class="help">Чтобы телефон напоминал, даже когда сайт закрыт, добавь события в календарь. Утром — вдохновение, вечером — вопрос об очках.</p>
     <div class="reminder-times">
      <label class="field">🌅 Утром<input type="time" id="morningTime" value="05:30"></label>
      <label class="field">🌙 Вечером<input type="time" id="eveningTime" value="20:30"></label>
     </div>
     <button type="button" id="downloadIcs" class="primary">🔔 Добавить напоминания в календарь</button>
-    <p class="note-box"><b>Как включить:</b> нажми кнопку, открой скачанный файл «zabugor-napominaniya.ics» и добавь события в Календарь. Разреши уведомления Календаря в настройках iPhone. Повторное добавление создаст дубликаты — если меняешь время, удали старые события.</p>
+    <p class="note-box"><b>iPhone:</b> открой скачанный файл «zabugor-napominaniya.ics» и добавь события в Календарь. <b>Android:</b> Google Календарь не всегда импортирует .ics в мобильном приложении — открой <a href="https://calendar.google.com/calendar/u/0/r/settings/export" target="_blank" rel="noopener noreferrer">настройки Google Календаря</a> в браузере с компьютера, выбери «Импорт», загрузи файл и включи уведомления Календаря на телефоне. Добавление файла повторно создаёт дубликаты.</p>
    </section>
+   <section class="android-install" hidden><h2>📲 ЗАБУГОР 2 на Android</h2><p>Хочешь открывать этот трекер с рабочего стола, как приложение?</p><button class="installAndroidBtn" type="button" hidden>📲 Установить на Android</button><p class="install-tip">В Chrome нажми ⋮ → «Установить приложение» или «Добавить на главный экран».</p></section>
    <section class="card">
     <h2>💾 Мои данные</h2><p class="help">Записи хранятся только в браузере этого телефона. Для подстраховки можно скачать копию — при очистке браузера записи могут пропасть.</p>
     <div class="actions"><button id="exportData" class="secondary" type="button">⬇️ Сохранить копию</button><button id="importDataBtn" class="secondary" type="button">⬆️ Восстановить копию</button></div><input type="file" id="importData" accept=".json,application/json" hidden>
@@ -192,6 +198,27 @@ $("downloadIcs").addEventListener("click",function(){if(!state.morning||!state.e
 $("exportData").addEventListener("click",function(){download("zabugor-moi-ochki.json",JSON.stringify({app:"ЗАБУГОР",version:1,exportedAt:new Date().toISOString(),level:state.level,month:state.month,entries:state.entries,morning:state.morning,evening:state.evening},null,2),"application/json;charset=utf-8");toast("Копия данных сохранена 💚");});
 $("importDataBtn").addEventListener("click",function(){$("importData").click();});
 $("importData").addEventListener("change",function(){var f=this.files&&this.files[0];if(!f)return;var reader=new FileReader();reader.onload=function(){try{var d=JSON.parse(reader.result);if(!d||!Array.isArray(d.entries))throw Error("Нет записей");var valid=d.entries.filter(function(e){return e&&typeof e.date==="string"&&keys.indexOf(e.date.slice(0,7))>-1&&Number(e.points)>0}).map(function(e){return{id:String(e.id||Date.now()+Math.random()),date:e.date,points:Number(e.points),note:String(e.note||"").slice(0,100)}});if(confirm("Восстановить "+valid.length+" записей из копии? Текущие записи будут заменены.")){state.entries=valid;if(["BASIC","PLUS"].indexOf(d.level)>-1)state.level=d.level;state.month=keys.indexOf(d.month)>-1?d.month:chooseMonth();save();render();toast("Копия восстановлена ✅");}}catch(err){toast("Не удалось прочитать файл копии");}};reader.readAsText(f);this.value="";});
+// Android: standard Chrome PWA installation with an optional native install prompt.
+var isAndroid=/Android/i.test(navigator.userAgent||"");
+var isStandalone=window.matchMedia&&window.matchMedia("(display-mode: standalone)").matches;
+var deferredInstallPrompt=null;
+function setInstallVisibility(){document.querySelectorAll(".android-install").forEach(function(el){el.hidden=!isAndroid||isStandalone;});}
+setInstallVisibility();
+window.addEventListener("beforeinstallprompt",function(event){
+ if(!isAndroid||isStandalone)return;
+ event.preventDefault();
+ deferredInstallPrompt=event;
+ document.querySelectorAll(".installAndroidBtn").forEach(function(btn){btn.hidden=false;});
+ setInstallVisibility();
+});
+document.querySelectorAll(".installAndroidBtn").forEach(function(btn){
+ btn.addEventListener("click",async function(){
+  if(!deferredInstallPrompt){toast("Открой меню Chrome ⋮ → Установить приложение");return;}
+  var event=deferredInstallPrompt;deferredInstallPrompt=null;
+  try{event.prompt();var choice=await event.userChoice;if(choice&&choice.outcome==="accepted")toast("Устанавливаем ЗАБУГОР 2 🌴");}catch(err){toast("Нажми ⋮ → Установить приложение");}
+ });
+});
+window.addEventListener("appinstalled",function(){isStandalone=true;deferredInstallPrompt=null;setInstallVisibility();});
 if("serviceWorker" in navigator&&location.protocol==="https:"){window.addEventListener("load",function(){navigator.serviceWorker.register("./sw.js").catch(function(){});});}
 })();
 </script>
