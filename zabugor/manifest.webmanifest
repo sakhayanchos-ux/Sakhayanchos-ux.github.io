@@ -1,0 +1,19 @@
+{
+  "id": "./",
+  "name": "Каникулы ЗАБУГОР — трекер",
+  "short_name": "ЗАБУГОР",
+  "description": "Каникулы ЗАБУГОР: мой личный трекер очков и мотивация",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#16cde2",
+  "theme_color": "#08b6ca",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
