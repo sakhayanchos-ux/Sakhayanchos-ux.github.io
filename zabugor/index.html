@@ -97,6 +97,15 @@ html,body{width:100%;max-width:100%;margin:0;overflow-x:hidden}
 .welcome-card,.main-panel,.track-head{width:100%;max-width:100%;margin-left:auto;margin-right:auto}
 .sky{left:0;right:0;width:100%;max-width:100%}
 @media(max-width:430px){.site-wrap{padding-left:16px!important;padding-right:16px!important}}
+
+/* v16: centered tracker column with equal side margins */
+#tracker>.site-wrap{display:block!important;width:100%!important;max-width:650px!important;margin-inline:auto!important;padding-inline:16px!important}
+#tracker>.site-wrap>main{display:flex!important;flex-direction:column!important;align-items:center!important;width:100%!important;min-width:0!important;margin:0 auto!important}
+#tracker>.site-wrap>main>.card,
+#tracker>.site-wrap>main>.android-install{box-sizing:border-box!important;display:block;width:100%!important;max-width:100%!important;min-width:0!important;margin-left:auto!important;margin-right:auto!important}
+#tracker .main-panel{margin-top:18px!important}
+#tracker .panel-label,#tracker .form-grid{min-width:0}
+@media(max-width:650px){#tracker>.site-wrap{padding-left:16px!important;padding-right:16px!important}}
 </style>
 </head>
 <body>
