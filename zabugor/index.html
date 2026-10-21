@@ -6,11 +6,11 @@
 <meta name="theme-color" content="#08b6ca">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="ЗАБУГОР 🌴">
+<meta name="apple-mobile-web-app-title" content="ЗАБУГОР 2">
 <meta name="description" content="Мой трекер Каникулы ЗАБУГОР: очки, цели, прогресс и мотивация для поездки в Таиланд.">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="icon" href="./icon.svg" type="image/svg+xml">
-<title>Каникулы ЗАБУГОР — мой трекер</title>
+<title>ЗАБУГОР 2 — мой трекер</title>
 <style>
 :root{--navy:#0a2f55;--blue:#065e85;--teal:#00acaa;--aqua:#00cfd9;--orange:#ff7155;--cream:#fffef4;--mint:#e3ffef;--muted:#52758b}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--navy);font:500 16px/1.4 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:linear-gradient(180deg,#1badf4 0%,#95edfa 23%,#06cfcf 48%,#baffb4 100%);min-height:100vh}
@@ -27,9 +27,9 @@ button,input,select{font:inherit}button{cursor:pointer;touch-action:manipulation
 .welcome-head{text-align:center;padding:24px 16px 10px}.welcome-head h1{font-size:29px;line-height:1.12;margin:0 0 9px}.welcome-head p{margin:0;color:#477188;font-weight:550}
 .level-list{padding:13px;display:grid;gap:13px}.level{border:none;text-align:left;border-radius:23px;padding:20px 21px;position:relative;display:block;width:100%;box-shadow:0 8px 20px #004d7730;transition:transform .18s,box-shadow .18s}.level:active{transform:scale(.98)}.level-basic{background:linear-gradient(120deg,#fff9e6,#fff1da 56%,#ffd0b8)}.level-plus{background:linear-gradient(120deg,#e5ffff,#d3faff 55%,#bde6ff)}.level small{display:block;color:var(--navy);font-size:11px;letter-spacing:1.1px;font-weight:850}.level strong{display:block;font-size:39px;line-height:1.1;font-weight:1000;color:#f2633f}.level-plus strong{color:#006f9d}.level .goal{display:block;font-weight:800;color:#154d68;margin-top:4px}.level .explainer{display:block;font-size:12px;color:#526f82;margin-top:8px;max-width:90%;line-height:1.35}.level .arrow{position:absolute;right:16px;top:20px;border-radius:50%;width:34px;height:34px;background:#ffffffaa;text-align:center;font-size:21px;line-height:33px;color:#0e6480}
 .small-foot{font-size:12px;color:#164f65;text-align:center;margin:17px auto 30px;max-width:410px;font-weight:650}
-.track-head{position:relative;min-height:245px;color:#fff;padding:22px 0 22px;text-align:center;text-shadow:0 2px 8px #00486060}.track-head .eyebrow{font-size:13px;font-weight:900;letter-spacing:1.1px}.track-head h1{font-size:42px;letter-spacing:-1px;margin:4px 0 0;line-height:1.05}.track-head h1 span{color:#fff5b5}.track-head p{margin:12px auto;max-width:305px;font-size:14px;font-weight:700}.top-row{display:flex;align-items:center;justify-content:space-between}.ghost{border:1px solid #ffffffb8;border-radius:30px;background:#ffffff4d;color:#fff;font-size:13px;font-weight:850;padding:8px 13px;backdrop-filter:blur(4px)}.level-pill{padding:8px 13px;border-radius:999px;background:#ffffffed;color:#025c7a;font-weight:950;font-size:12px;text-shadow:none}
+.track-head{position:relative;min-height:320px;color:#fff;padding:22px 0 48px;text-align:center;text-shadow:0 2px 8px #00486060}.track-head .eyebrow{font-size:13px;font-weight:900;letter-spacing:1.1px}.track-head h1{font-size:42px;letter-spacing:-1px;margin:4px 0 0;line-height:1.05}.track-head h1 span{color:#fff5b5}.track-head p{margin:12px auto;max-width:305px;font-size:14px;font-weight:700}.top-row{display:flex;align-items:center;justify-content:space-between}.ghost{border:1px solid #ffffffb8;border-radius:30px;background:#ffffff4d;color:#fff;font-size:13px;font-weight:850;padding:8px 13px;backdrop-filter:blur(4px)}.level-pill{padding:8px 13px;border-radius:999px;background:#ffffffed;color:#025c7a;font-weight:950;font-size:12px;text-shadow:none}
 .card{background:#fffefa;border-radius:23px;padding:19px;margin:13px 0;box-shadow:0 10px 23px #005c7f21;border:1px solid #ffffffdf}
-.main-panel{position:relative;margin-top:-42px;background:linear-gradient(135deg,#fffefa,#fff4dc)}.panel-label{display:flex;align-items:center;justify-content:space-between;gap:8px;color:var(--muted);font-size:12px;font-weight:900;letter-spacing:.5px;text-transform:uppercase}
+.main-panel{position:relative;margin-top:18px;background:linear-gradient(135deg,#fffefa,#fff4dc)}.panel-label{display:flex;align-items:center;justify-content:space-between;gap:8px;color:var(--muted);font-size:12px;font-weight:900;letter-spacing:.5px;text-transform:uppercase}
 .month-choose{appearance:none;max-width:150px;border:1px solid #b4e4e1;background:#ffffffbd;color:#06466c;border-radius:12px;font-size:14px;font-weight:800;padding:9px 10px}
 .big-count{font-size:47px;font-weight:1000;line-height:1.1;letter-spacing:-1.4px;margin:10px 0 7px}.big-count small{font-size:18px;color:var(--muted);letter-spacing:0}
 .progress{height:14px;background:#d7e9e8;box-shadow:inset 0 1px 3px #154b6b17;border-radius:30px;overflow:hidden;margin:9px 0}.progress>div{height:100%;border-radius:30px;background:linear-gradient(90deg,#00b9bc,#46d66a);transition:width .4s;min-width:0}
@@ -42,7 +42,7 @@ button,input,select{font:inherit}button{cursor:pointer;touch-action:manipulation
 .note-box{font-size:12px;color:#416a80;line-height:1.45;margin:11px 0 0}.note-box b{color:#08496c}
 .actions{display:flex;gap:8px;flex-wrap:wrap}.actions .secondary{flex:1;font-size:13px}.footer{text-align:center;color:#0b5c75;font-size:12px;font-weight:700;margin:20px 0 5px}.toast{position:fixed;bottom:calc(20px + env(safe-area-inset-bottom));left:50%;transform:translate(-50%,30px);opacity:0;pointer-events:none;z-index:20;background:#073954;color:white;border-radius:14px;padding:13px 18px;box-shadow:0 8px 25px #012c5370;width:max-content;max-width:90vw;font-weight:850;transition:all .22s}.toast.show{opacity:1;transform:translate(-50%,0)}
 hr{border:0;border-top:1px solid #e1efec;margin:16px 0}
-@media(min-width:600px){.site-wrap{padding-inline:25px}.welcome-content{margin-top:65px}.track-head{min-height:265px}.logo-big{font-size:82px}.track-head h1{font-size:51px}}
+@media(min-width:600px){.site-wrap{padding-inline:25px}.welcome-content{margin-top:65px}.track-head{min-height:340px}.logo-big{font-size:82px}.track-head h1{font-size:51px}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
 </style>
 </head>
