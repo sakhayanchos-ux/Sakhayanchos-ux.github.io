@@ -66,6 +66,16 @@ body{padding-top:0}
 }
 /* Raise only the central title, emojis and motivational text by 30px. Buttons stay fixed. */
 #tracker .track-head > div[style*="font-size:29px"],#tracker .track-head > .eyebrow,#tracker .track-head > h1,#tracker .track-head > p{position:relative;top:-50px}
+
+/* v13: full-bleed, symmetric app background on all viewport sizes */
+html,body{width:100%;max-width:100%;min-width:0;overflow-x:hidden}
+body{margin:0;background:linear-gradient(180deg,#1ab3ed 0%,#60dbec 34%,#00bfc8 100%) fixed}
+.sky{position:fixed;left:0;right:0;top:0;width:100%;max-width:none;margin:0;z-index:0}
+.palm.left{left:max(-28px,calc((100vw - 900px)/2))}
+.palm.right{right:max(-28px,calc((100vw - 900px)/2))}
+.screen{width:100%;max-width:none;margin:0 auto}
+.site-wrap{box-sizing:border-box;width:100%;max-width:650px;margin-left:auto;margin-right:auto;padding-left:16px;padding-right:16px}
+@media(min-width:651px){.site-wrap{max-width:650px}.sky{width:100vw}}
 </style>
 </head>
 <body>
