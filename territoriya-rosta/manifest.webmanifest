@@ -1,0 +1,13 @@
+{
+  "id": "./",
+  "name": "Территория роста 2026",
+  "short_name": "Территория роста",
+  "description": "Мой трекер TVP, клиентов ПРК и Старших Консультантов для промоушена 2026",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#eaf3ec",
+  "theme_color": "#0b4d3a",
+  "icons": [{"src": "./icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable"}]
+}
