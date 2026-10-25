@@ -274,19 +274,20 @@
           reportLine(`Талия: ${fmt(wa0)} → ${fmt(wa1)} см (${delta(wa0,wa1)} см)`);
         }
         if(has('muscle')) {
-          let desc=`${fmt(m0)} → ${fmt(m1)} кг.`;
           if(hasWeight) {
             const share0=m0/w0*100, share1=m1/w1*100;
-            desc+=` Доля в весе: ${fmt(share0)}% → ${fmt(share1)}% (${delta(share0,share1)} п.п.).`;
+            panel(outHero,'Мышцы — доля от веса',`${delta(share0,share1)} п.п.`,`${fmt(share0)}% → ${fmt(share1)}%; мышечная масса: ${fmt(m0)} → ${fmt(m1)} кг (${delta(m0,m1)} кг).`,true);
             reportLine(`Мышцы: ${fmt(m0)} → ${fmt(m1)} кг (${delta(m0,m1)} кг); доля в весе: ${fmt(share0)}% → ${fmt(share1)}% (${delta(share0,share1)} п.п.)`);
-          } else reportLine(`Мышцы: ${fmt(m0)} → ${fmt(m1)} кг (${delta(m0,m1)} кг)`);
-          panel(outDetail,'Мышечная масса',`${delta(m0,m1)} кг`,desc);
+          } else {
+            panel(outHero,'Мышечная масса',`${delta(m0,m1)} кг`,`${fmt(m0)} → ${fmt(m1)} кг. Для процента от веса укажите вес в обоих измерениях.`,true);
+            reportLine(`Мышцы: ${fmt(m0)} → ${fmt(m1)} кг (${delta(m0,m1)} кг)`);
+          }
         }
         const [a0,a1]=values.water;
         if(has('water')) {
           if(hasWeight) {
             const litres0=w0*a0/100,litres1=w1*a1/100;
-            panel(outDetail,'Вода в организме',`≈ ${fmt(litres1)} л`,`${fmt(litres0)} → ${fmt(litres1)} л (${delta(litres0,litres1)} л); ${fmt(a0)}% → ${fmt(a1)}%.`);
+            panel(outHero,'Вода в организме',`≈ ${delta(litres0,litres1,2)} л`,`${fmt(litres0)} → ${fmt(litres1)} л; ${fmt(a0)}% → ${fmt(a1)}%. Это оценка воды в теле, не количество выпитой воды.`,true);
             reportLine(`Вода: ≈ ${fmt(litres0)} → ${fmt(litres1)} л (${delta(litres0,litres1)} л), ${fmt(a0)}% → ${fmt(a1)}%`);
           } else {
             panel(outDetail,'Вода в организме',`${fmt(a1)}%`,`${fmt(a0)}% → ${fmt(a1)}% (${delta(a0,a1)} п.п.). Для перевода в литры нужен вес.`);
