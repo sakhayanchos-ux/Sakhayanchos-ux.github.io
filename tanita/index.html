@@ -134,10 +134,7 @@
           </div>
         </div>
         <div class="panel">
-          <div class="profile" style="grid-template-columns:minmax(0,1fr) minmax(135px,.5fr)">
-            <div><h3>Сравнение с маргарином</h3><p class="tiny" style="margin-top:5px">Только для общего жира в кг — не для уровня висцерального жира.</p></div>
-            <label class="field">Вес пачки<select id="pack"><option value="180">180 г</option><option value="200" selected>200 г</option><option value="250">250 г</option><option value="500">500 г</option></select></label>
-          </div>
+          <div><h3>Как понимать внутренний жир</h3><p class="tiny" style="margin-top:5px">Пачки маргарина — только образ для объяснения висцерального жира, а не расчёт по индексу Tanita. Уровень нельзя достоверно перевести в пачки или килограммы.</p></div>
           <div class="actions">
             <button class="primary" type="submit">Рассчитать изменения</button>
             <button class="secondary" type="button" id="clear">Очистить всё</button>
@@ -253,11 +250,8 @@
         if(has('fat')) {
           if (hasWeight) {
             const fatKg0=w0*f0/100, fatKg1=w1*f1/100, lost=fatKg0-fatKg1;
-            const pack=Number($('pack').value), amount=lost/(pack/1000);
-            const equivalent = lost>0.001?` ≈ ${fmt(amount)} пач. маргарина по ${pack} г (общий жир).`:'';
-            panel(outHero,'Общий жир',`${delta(fatKg0,fatKg1)} кг`,`${fmt(fatKg0)} → ${fmt(fatKg1)} кг; ${fmt(f0)}% → ${fmt(f1)}%.${equivalent}`,true);
+            panel(outHero,'Общий жир',`${delta(fatKg0,fatKg1)} кг`,`${fmt(fatKg0)} → ${fmt(fatKg1)} кг; ${fmt(f0)}% → ${fmt(f1)}%.`,true);
             reportLine(`Общий жир: ${fmt(fatKg0)} → ${fmt(fatKg1)} кг (${delta(fatKg0,fatKg1)} кг), ${fmt(f0)}% → ${fmt(f1)}%`);
-            if(lost>0.001) reportLine(`Ушедший ОБЩИЙ жир ≈ ${fmt(amount)} пачки маргарина по ${pack} г (образное сравнение)`);
           } else {
             panel(outHero,'Общий жир',`${delta(f0,f1)} п.п.`,`${fmt(f0)}% → ${fmt(f1)}%. Для пересчёта в килограммы нужен вес.`,true);
             reportLine(`Процент жира: ${fmt(f0)}% → ${fmt(f1)}% (${delta(f0,f1)} п.п.)`);
@@ -265,7 +259,7 @@
         }
         const [v0,v1]=values.visceral;
         if(has('visceral')) {
-          panel(outHero,'Висцеральный жир',`${delta(v0,v1)} уровня`,`${fmt(v0)} → ${fmt(v1)} (индекс Tanita; не кг и не %).`,true);
+          panel(outHero,'Висцеральный жир',`${delta(v0,v1)} уровня`,`${fmt(v0)} → ${fmt(v1)} (индекс Tanita; не кг и не %. Нельзя переводить в пачки маргарина).`,true);
           reportLine(`Висцеральный жир Tanita: ${fmt(v0)} → ${fmt(v1)} (изменение ${delta(v0,v1)} уровня)`);
         }
         const [wa0,wa1]=values.waist;
