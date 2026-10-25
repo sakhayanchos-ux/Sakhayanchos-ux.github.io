@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#174e40">
+  <meta name="description" content="Калькулятор изменений состава тела по показателям Tanita: вес, жир, мышцы, вода, висцеральный жир и объёмы.">
+  <title>Калькулятор показателей тела — PROTEIN STUDIO</title>
+  <style>
+    :root { color-scheme: light; --bg:#f3f6f4; --paper:#fff; --ink:#1f302b; --muted:#697b73; --green:#1c6a52; --light:#eaf4ef; --border:#dfebe5; --shadow:0 12px 40px rgba(20,63,49,.06); --orange:#a45d26; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.42 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif; }
+    button,input,select { font:inherit; }
+    .wrap { max-width:960px; padding:26px 18px 60px; margin:auto; }
+    .brand { display:flex; align-items:center; gap:10px; margin-bottom:28px; color:#164735; font-size:12px; font-weight:800; letter-spacing:.14em; }
+    .mark { display:grid; place-items:center; background:#1b6b52; color:white; width:34px; height:34px; border-radius:10px; font-size:14px; letter-spacing:-.04em; }
+    h1 { font-size:clamp(27px,5vw,39px); letter-spacing:-.045em; line-height:1.12; margin:0 0 11px; font-weight:750; }
+    h2 { font-size:20px; letter-spacing:-.025em; margin:0; }
+    h3 { font-size:15px; margin:0; }
+    p { margin:0; }
+    .lead { color:var(--muted); font-size:15px; max-width:720px; margin-bottom:22px; }
+    .panel { background:var(--paper); border:1px solid var(--border); border-radius:19px; box-shadow:var(--shadow); padding:23px; margin-bottom:17px; }
+    .panel-top { display:flex; justify-content:space-between; gap:15px; align-items:baseline; margin-bottom:17px; }
+    .tiny { color:var(--muted); font-size:12px; }
+    .pill { display:inline-block; border-radius:100px; background:var(--light); color:#216047; font-size:11px; font-weight:750; padding:5px 10px; white-space:nowrap; }
+    .profile { display:grid; grid-template-columns:1.2fr .6fr .85fr .85fr; gap:11px; }
+    label.field { display:flex; flex-direction:column; gap:6px; font-size:12px; font-weight:700; color:#476358; }
+    .field input,.field select,.metric-input { border:1px solid #d5e4dc; border-radius:10px; background:#fcfefc; min-width:0; width:100%; height:44px; padding:0 12px; outline:0; color:var(--ink); }
+    input:focus,select:focus { border-color:var(--green) !important; box-shadow:0 0 0 3px rgba(28,106,82,.12); }
+    input::placeholder { color:#a1ada6; }
+    .table-header,.metric { display:grid; grid-template-columns:minmax(130px, 1.6fr) minmax(88px,1fr) minmax(88px,1fr); gap:13px; align-items:center; }
+    .table-header { padding:9px 11px 13px; color:#698076; font-size:12px; font-weight:750; }
+    .table-header span:not(:first-child) { text-align:center; }
+    .metric { border-top:1px solid #edf2ef; padding:10px 11px; }
+    .metric-label { display:flex; flex-direction:column; line-height:1.25; gap:4px; font-size:14px; font-weight:700; }
+    .unit { color:#8a9d92; font-size:11px; font-weight:550; }
+    .metric-input { height:42px; text-align:center; font-size:15px; padding:0 6px; font-variant-numeric:tabular-nums; }
+    .sub-section { margin-top:20px; border-top:1px solid var(--border); padding-top:19px; }
+    .sub-section p { font-size:12px; margin:5px 0 13px; color:var(--muted); }
+    .actions { display:flex; gap:10px; align-items:center; margin:14px 0 0; flex-wrap:wrap; }
+    button { border-radius:12px; padding:12px 18px; cursor:pointer; border:1px solid transparent; font-weight:750; transition:background .15s ease,transform .1s ease; }
+    button:active { transform:translateY(1px); }
+    .primary { background:#1c6952; color:white; }
+    .primary:hover { background:#12563f; }
+    .secondary { color:#2e5c48; background:white; border-color:#c9ddd1; }
+    .secondary:hover { background:#f3f8f4; }
+    .quiet { padding:11px; color:#698076; background:transparent; }
+    .quiet:hover { color:#315843; }
+    .message { margin:12px 0 0; padding:10px 13px; background:#fff3e8; border:1px solid #f6d9be; color:#7a4b28; border-radius:10px; font-size:13px; display:none; }
+    .message.show { display:block; }
+    .results { display:none; }
+    .results.shown { display:block; }
+    .result-head { display:flex; justify-content:space-between; align-items:center; gap:15px; margin-bottom:13px; flex-wrap:wrap; }
+    .result-meta { color:#75867c; font-size:12px; margin-top:3px; }
+    .hero { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:11px; margin-bottom:12px; }
+    .result-card { padding:17px; border-radius:15px; background:white; border:1px solid var(--border); }
+    .result-card.accent { background:linear-gradient(140deg,#e9f5ed,#f7fbf8); border-color:#d3e9d9; }
+    .r-title { font-size:12px; letter-spacing:.01em; color:#647a6e; font-weight:750; }
+    .r-big { font-size:clamp(23px,4vw,30px); color:#183f32; font-weight:800; margin:8px 0 5px; line-height:1.1; letter-spacing:-.035em; }
+    .r-explain { font-size:13px; color:#65766d; line-height:1.42; }
+    .details { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:11px; }
+    .measure-result { display:flex; flex-wrap:wrap; gap:7px; margin-top:9px; }
+    .measure-chip { display:inline-flex; gap:6px; padding:7px 10px; border-radius:9px; background:#f0f6f2; color:#275840; font-size:13px; }
+    .note { margin-top:16px; font-size:12px; line-height:1.55; color:#6e7c74; }
+    .small-alert { color:#9b5b23; font-size:12px; margin-top:10px; }
+    .result-actions { margin:15px 0 0; }
+    .footer { text-align:center; margin-top:20px; color:#809187; font-size:12px; }
+    .only-print { display:none; }
+    @media(max-width:620px) {
+      .wrap { padding:16px 12px 36px; }
+      .brand { margin-bottom:20px; }
+      .panel { padding:15px 12px; border-radius:16px; }
+      .profile { grid-template-columns:repeat(2,minmax(0,1fr)); }
+      .table-header,.metric { grid-template-columns:minmax(106px,1.35fr) minmax(72px,1fr) minmax(72px,1fr); gap:8px; }
+      .table-header { padding:8px 2px 10px; }
+      .metric { padding:9px 2px; }
+      .metric-label { font-size:12px; }
+      .unit { font-size:10px; }
+      .metric-input { font-size:15px; height:40px; }
+      .hero { grid-template-columns:repeat(2,minmax(0,1fr)); }
+      .details { grid-template-columns:1fr; }
+      .result-card { padding:13px; }
+      .r-big { font-size:24px; }
+      .actions button { flex:1 1 auto; }
+    }
+    @media(max-width:360px) {
+      .table-header,.metric { grid-template-columns:minmax(90px,1.25fr) minmax(68px,1fr) minmax(68px,1fr); gap:5px; }
+      .metric-label { font-size:11px; }
+      .metric-input { font-size:14px; }
+    }
+    @media print {
+      :root { --border:#d6e0d8; }
+      body { background:white; }
+      .wrap { max-width:none; padding:0; }
+      .no-print,#entry,#warn,.result-actions,.footer { display:none !important; }
+      .results,.results.shown { display:block !important; }
+      .hero,.details { break-inside:avoid; }
+      .result-card { break-inside:avoid; }
+      .only-print { display:block; }
+      .note { color:black; }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="brand"><span class="mark">PS</span><span>PROTEIN STUDIO</span></div>
+    <header class="no-print">
+      <h1>Калькулятор состава тела</h1>
+      <p class="lead">Сравните первое и сегодняшнее измерения Tanita. Килограммы, проценты, литры и сантиметры посчитаются автоматически. Никаких регистраций и сохранений.</p>
+    </header>
+
+    <section id="entry">
+      <form id="measureForm" novalidate autocomplete="off">
+        <div class="panel">
+          <div class="panel-top"><h2>Данные человека</h2><span class="pill">Не сохраняются</span></div>
+          <div class="profile">
+            <label class="field">Имя (необязательно)<input id="person" type="text" placeholder="Например, Анна" maxlength="80" autocapitalize="words"></label>
+            <label class="field">Рост, см<input id="height" type="text" inputmode="decimal" placeholder="165" maxlength="6"></label>
+            <label class="field">Дата начала<input id="startDate" type="date"></label>
+            <label class="field">Сегодняшняя дата<input id="endDate" type="date"></label>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-top"><h2>9 показателей Tanita</h2><span class="tiny">Заполните известные</span></div>
+          <div class="table-header"><span>Показатель</span><span>В начале</span><span>Сейчас</span></div>
+          <div id="metricRows"></div>
+          <div class="sub-section">
+            <h3>Объёмы тела</h3>
+            <p>Сантиметры — необязательные. Можно ввести только те, которые измеряли.</p>
+            <div class="table-header"><span>Обхват</span><span>В начале</span><span>Сейчас</span></div>
+            <div id="circRows"></div>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="profile" style="grid-template-columns:minmax(0,1fr) minmax(135px,.5fr)">
+            <div><h3>Сравнение с маргарином</h3><p class="tiny" style="margin-top:5px">Только для общего жира в кг — не для уровня висцерального жира.</p></div>
+            <label class="field">Вес пачки<select id="pack"><option value="180">180 г</option><option value="200" selected>200 г</option><option value="250">250 г</option><option value="500">500 г</option></select></label>
+          </div>
+          <div class="actions">
+            <button class="primary" type="submit">Рассчитать изменения</button>
+            <button class="secondary" type="button" id="clear">Очистить всё</button>
+          </div>
+          <div id="warn" class="message" role="alert" aria-live="polite"></div>
+        </div>
+      </form>
+    </section>
+
+    <section id="results" class="results" aria-live="polite">
+      <div class="result-head">
+        <div><h2>Результаты сравнения</h2><p id="who" class="result-meta"></p></div>
+        <span class="pill">По введённым измерениям</span>
+      </div>
+      <div class="hero" id="highlights"></div>
+      <div class="details" id="details"></div>
+      <div class="panel" style="margin-top:12px;box-shadow:none">
+        <div style="font-weight:750;font-size:14px">Как читать результат</div>
+        <p class="note" style="margin-top:7px">Жир в кг = вес × процент жира / 100. Мышцы в % = мышечная масса / вес × 100. Вода в литрах ≈ вес × процент воды / 100. Это расчёты по показаниям биоимпедансных весов, а не точные измерения объёмов тканей. Висцеральный жир Tanita — уровень (индекс), его нельзя переводить в килограммы или пачки маргарина. Сравнивайте измерения в похожих условиях: время дня, еда, нагрузка, питьевой режим.</p>
+        <p id="missingNote" class="small-alert" hidden></p>
+      </div>
+      <div class="actions result-actions no-print">
+        <button class="primary" type="button" id="copy">Скопировать итог для WhatsApp</button>
+        <button class="secondary" type="button" id="print">Распечатать / PDF</button>
+        <button class="quiet" type="button" id="back">Изменить значения</button>
+      </div>
+    </section>
+    <footer class="footer">PROTEIN STUDIO · Калькулятор сравнения измерений · Данные остаются только на открытой странице</footer>
+  </main>
+  <script>
+    (() => {
+      'use strict';
+      const parameters = [
+        { id:'weight', label:'Вес', unit:'кг', max:600 },
+        { id:'fat', label:'Жир', unit:'%', max:100 },
+        { id:'water', label:'Вода', unit:'%', max:100 },
+        { id:'muscle', label:'Мышечная масса', unit:'кг', max:500 },
+        { id:'bone', label:'Костная масса', unit:'кг', max:30 },
+        { id:'visceral', label:'Висцеральный жир', unit:'уровень 1–59', min:1, max:59 },
+        { id:'metAge', label:'Метаболический возраст', unit:'лет', max:150 },
+        { id:'bmr', label:'Основной обмен', unit:'ккал/день', max:10000 },
+        { id:'physique', label:'Тип телосложения', unit:'код Tanita 1–9', min:1, max:9 }
+      ];
+      const circumferences = [
+        { id:'waist', label:'Талия', unit:'см', max:300 },
+        { id:'belly', label:'Живот', unit:'см', max:300 },
+        { id:'hips', label:'Бёдра', unit:'см', max:300 },
+        { id:'chest', label:'Грудь', unit:'см', max:300 }
+      ];
+      const $ = id => document.getElementById(id);
+      const escapeHTML = value => String(value).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
+      const isFiniteNumber = n => typeof n === 'number' && Number.isFinite(n);
+      const fmt = (n, digits=1) => n.toLocaleString('ru-RU', {minimumFractionDigits:digits, maximumFractionDigits:digits});
+      const signed = (n,d=1) => `${n>0?'+':n<0?'−':''}${fmt(Math.abs(n),d)}`;
+      const delta = (a,b,d=1) => signed(b-a,d);
+      const readNum = id => {
+        const raw = $(id).value.trim().replace(/\s/g,'').replace(',','.');
+        if (!raw) return null;
+        return /^\+?(?:\d+(?:\.\d+)?|\.\d+)$/.test(raw) ? Number(raw) : NaN;
+      };
+      const card = (title, big, explanation, accent=false, extra='') => `<article class="result-card ${accent?'accent':''}"><div class="r-title">${escapeHTML(title)}</div><div class="r-big">${escapeHTML(big)}</div><div class="r-explain">${escapeHTML(explanation)}</div>${extra}</article>`;
+      const markupFor = p => `<div class="metric"><label class="metric-label" for="${p.id}0"><span>${escapeHTML(p.label)}</span><span class="unit">${escapeHTML(p.unit)}</span></label><input class="metric-input" id="${p.id}0" aria-label="${escapeHTML(p.label)}, в начале" type="text" inputmode="decimal" placeholder="—" maxlength="9"><input class="metric-input" id="${p.id}1" aria-label="${escapeHTML(p.label)}, сейчас" type="text" inputmode="decimal" placeholder="—" maxlength="9"></div>`;
+      $('metricRows').innerHTML = parameters.map(markupFor).join('');
+      $('circRows').innerHTML = circumferences.map(markupFor).join('');
+      let copyText = '';
+      const warn = message => { $('warn').textContent=message; $('warn').classList.add('show'); };
+      const hideWarn = () => { $('warn').textContent=''; $('warn').classList.remove('show'); };
+      $('clear').addEventListener('click', () => {
+        $('measureForm').reset();
+        document.querySelectorAll('.metric-input').forEach(el => el.value='');
+        $('results').classList.remove('shown');
+        hideWarn(); copyText='';
+        window.scrollTo({top:0,behavior:'smooth'});
+      });
+      $('measureForm').addEventListener('submit', event => {
+        event.preventDefault(); hideWarn();
+        const keys = [...parameters,...circumferences];
+        const values = {};
+        let validEntries=0;
+        let incomplete=0;
+        for (const p of keys) {
+          const a = readNum(p.id+'0'), b = readNum(p.id+'1');
+          for(const [value,idx] of [[a,0],[b,1]]) {
+            if (value!==null) {
+              if (!isFiniteNumber(value) || value < (p.min??0) || value > p.max || (p.id!=='fat' && p.id!=='water' && value===0)) {
+                warn(`Проверьте поле «${p.label}» (${idx===0?'в начале':'сейчас'}). Допустимый диапазон: ${p.min??(p.id==='fat'||p.id==='water'?0:'больше 0')}–${p.max} ${p.unit}.`);
+                $(p.id+idx).focus(); return;
+              }
+            }
+          }
+          values[p.id]=[a,b];
+          if(a!==null && b!==null) validEntries++;
+          else if(a!==null || b!==null) incomplete++;
+        }
+        const h=readNum('height');
+        if(h!==null && (!isFiniteNumber(h)||h<80||h>250)) { warn('Проверьте рост: введите сантиметры от 80 до 250.'); $('height').focus(); return; }
+        const [w0,w1]=values.weight;
+        const [m0,m1]=values.muscle;
+        if((w0!==null && m0!==null && m0>w0) || (w1!==null && m1!==null && m1>w1)) {
+          warn('Мышечная масса не может быть больше общего веса. Проверьте килограммы.'); return;
+        }
+        if(!validEntries) { warn('Заполните хотя бы один показатель в двух колонках: «В начале» и «Сейчас».'); return; }
+        const has = key => values[key][0]!==null && values[key][1]!==null;
+        const hasWeight = has('weight');
+        const outHero=[], outDetail=[], report=[];
+        const reportLine = line => report.push(line);
+        const panel = (area, title, main, secondary, accent=false) => area.push(card(title,main,secondary,accent));
+        if (hasWeight) {
+          panel(outHero,'Вес',`${delta(w0,w1)} кг`,`${fmt(w0)} → ${fmt(w1)} кг`,true);
+          reportLine(`Вес: ${fmt(w0)} → ${fmt(w1)} кг (${delta(w0,w1)} кг)`);
+        }
+        const [f0,f1]=values.fat;
+        if(has('fat')) {
+          if (hasWeight) {
+            const fatKg0=w0*f0/100, fatKg1=w1*f1/100, lost=fatKg0-fatKg1;
+            const pack=Number($('pack').value), amount=lost/(pack/1000);
+            const equivalent = lost>0.001?` ≈ ${fmt(amount)} пач. маргарина по ${pack} г (общий жир).`:'';
+            panel(outHero,'Общий жир',`${delta(fatKg0,fatKg1)} кг`,`${fmt(fatKg0)} → ${fmt(fatKg1)} кг; ${fmt(f0)}% → ${fmt(f1)}%.${equivalent}`,true);
+            reportLine(`Общий жир: ${fmt(fatKg0)} → ${fmt(fatKg1)} кг (${delta(fatKg0,fatKg1)} кг), ${fmt(f0)}% → ${fmt(f1)}%`);
+            if(lost>0.001) reportLine(`Ушедший ОБЩИЙ жир ≈ ${fmt(amount)} пачки маргарина по ${pack} г (образное сравнение)`);
+          } else {
+            panel(outHero,'Общий жир',`${delta(f0,f1)} п.п.`,`${fmt(f0)}% → ${fmt(f1)}%. Для пересчёта в килограммы нужен вес.`,true);
+            reportLine(`Процент жира: ${fmt(f0)}% → ${fmt(f1)}% (${delta(f0,f1)} п.п.)`);
+          }
+        }
+        const [v0,v1]=values.visceral;
+        if(has('visceral')) {
+          panel(outHero,'Висцеральный жир',`${delta(v0,v1)} уровня`,`${fmt(v0)} → ${fmt(v1)} (индекс Tanita; не кг и не %).`,true);
+          reportLine(`Висцеральный жир Tanita: ${fmt(v0)} → ${fmt(v1)} (изменение ${delta(v0,v1)} уровня)`);
+        }
+        const [wa0,wa1]=values.waist;
+        if(has('waist')) {
+          panel(outHero,'Талия',`${delta(wa0,wa1)} см`,`${fmt(wa0)} → ${fmt(wa1)} см`,true);
+          reportLine(`Талия: ${fmt(wa0)} → ${fmt(wa1)} см (${delta(wa0,wa1)} см)`);
+        }
+        if(has('muscle')) {
+          let desc=`${fmt(m0)} → ${fmt(m1)} кг.`;
+          if(hasWeight) {
+            const share0=m0/w0*100, share1=m1/w1*100;
+            desc+=` Доля в весе: ${fmt(share0)}% → ${fmt(share1)}% (${delta(share0,share1)} п.п.).`;
+            reportLine(`Мышцы: ${fmt(m0)} → ${fmt(m1)} кг (${delta(m0,m1)} кг); доля в весе: ${fmt(share0)}% → ${fmt(share1)}% (${delta(share0,share1)} п.п.)`);
+          } else reportLine(`Мышцы: ${fmt(m0)} → ${fmt(m1)} кг (${delta(m0,m1)} кг)`);
+          panel(outDetail,'Мышечная масса',`${delta(m0,m1)} кг`,desc);
+        }
+        const [a0,a1]=values.water;
+        if(has('water')) {
+          if(hasWeight) {
+            const litres0=w0*a0/100,litres1=w1*a1/100;
+            panel(outDetail,'Вода в организме',`≈ ${fmt(litres1)} л`,`${fmt(litres0)} → ${fmt(litres1)} л (${delta(litres0,litres1)} л); ${fmt(a0)}% → ${fmt(a1)}%.`);
+            reportLine(`Вода: ≈ ${fmt(litres0)} → ${fmt(litres1)} л (${delta(litres0,litres1)} л), ${fmt(a0)}% → ${fmt(a1)}%`);
+          } else {
+            panel(outDetail,'Вода в организме',`${fmt(a1)}%`,`${fmt(a0)}% → ${fmt(a1)}% (${delta(a0,a1)} п.п.). Для перевода в литры нужен вес.`);
+            reportLine(`Вода: ${fmt(a0)}% → ${fmt(a1)}% (${delta(a0,a1)} п.п.)`);
+          }
+        }
+        const [b0,b1]=values.bone;
+        if(has('bone')) {
+          panel(outDetail,'Костная масса',`${delta(b0,b1,2)} кг`,`${fmt(b0,2)} → ${fmt(b1,2)} кг`);
+          reportLine(`Костная масса: ${fmt(b0,2)} → ${fmt(b1,2)} кг (${delta(b0,b1,2)} кг)`);
+        }
+        const [age0,age1]=values.metAge;
+        if(has('metAge')) {
+          panel(outDetail,'Метаболический возраст',`${delta(age0,age1,0)} лет`,`${fmt(age0,0)} → ${fmt(age1,0)} лет (оценка весов)`);
+          reportLine(`Метаболический возраст: ${fmt(age0,0)} → ${fmt(age1,0)} лет`);
+        }
+        const [cal0,cal1]=values.bmr;
+        if(has('bmr')) {
+          panel(outDetail,'Основной обмен',`${delta(cal0,cal1,0)} ккал`,`${fmt(cal0,0)} → ${fmt(cal1,0)} ккал/день`);
+          reportLine(`Основной обмен: ${fmt(cal0,0)} → ${fmt(cal1,0)} ккал/день`);
+        }
+        const [body0,body1]=values.physique;
+        if(has('physique')) {
+          panel(outDetail,'Тип телосложения',`${fmt(body0,0)} → ${fmt(body1,0)}`,'Код категории Tanita 1–9. Разница кодов не означает кг или проценты.');
+          reportLine(`Тип телосложения Tanita: ${fmt(body0,0)} → ${fmt(body1,0)}`);
+        }
+        if(h!==null && hasWeight) {
+          const bmi0=w0/Math.pow(h/100,2), bmi1=w1/Math.pow(h/100,2);
+          panel(outDetail,'ИМТ (по росту)',fmt(bmi1),`${fmt(bmi0)} → ${fmt(bmi1)} (${delta(bmi0,bmi1)})`);
+          reportLine(`ИМТ: ${fmt(bmi0)} → ${fmt(bmi1)}`);
+        }
+        const completedCirc=circumferences.filter(c=>has(c.id));
+        if(completedCirc.length) {
+          const lines=completedCirc.map(c=>{
+            const [start,now]=values[c.id];
+            reportLine(`${c.label}: ${fmt(start)} → ${fmt(now)} см (${delta(start,now)} см)`);
+            return `<span class="measure-chip">${escapeHTML(c.label)}: <strong>${escapeHTML(delta(start,now))} см</strong></span>`;
+          }).join('');
+          outDetail.push(`<article class="result-card"><div class="r-title">Обхваты тела</div><div class="r-big">Сантиметры</div><div class="measure-result">${lines}</div></article>`);
+        }
+        const person = $('person').value.trim();
+        const startDate = $('startDate').value, endDate=$('endDate').value;
+        if(startDate && endDate && endDate<startDate) { warn('Дата сегодняшнего измерения не должна быть раньше даты начала.'); $('endDate').focus(); return; }
+        const dateRU = date => date ? date.split('-').reverse().join('.') : '';
+        const label=[person, startDate ? dateRU(startDate) : '', endDate ? `— ${dateRU(endDate)}` : ''].filter(Boolean).join(' ');
+        $('who').textContent=label || 'Начальные и текущие показатели';
+        $('highlights').innerHTML=outHero.join('');
+        $('details').innerHTML=outDetail.join('');
+        $('highlights').style.display=outHero.length?'grid':'none';
+        $('details').style.display=outDetail.length?'grid':'none';
+        $('missingNote').hidden = !incomplete;
+        $('missingNote').textContent = incomplete ? `В ${incomplete} строках заполнена только одна колонка. Эти строки в расчёт не вошли.` : '';
+        copyText = ['PROTEIN STUDIO · Результаты состава тела', person?`Имя: ${person}`:null, startDate?`Первый замер: ${dateRU(startDate)}`:null, endDate?`Текущий замер: ${dateRU(endDate)}`:null, '', ...report, '', 'Примечание: индекс висцерального жира — не килограммы. Значения жира, воды и мышечной доли рассчитаны по показаниям Tanita.'].filter(x=>x!==null).join('\n');
+        $('results').classList.add('shown');
+        $('results').scrollIntoView({behavior:'smooth',block:'start'});
+      });
+      $('copy').addEventListener('click',async()=>{
+        if(!copyText)return;
+        try {
+          if(navigator.clipboard && window.isSecureContext) await navigator.clipboard.writeText(copyText);
+          else {
+            const temp=document.createElement('textarea');temp.value=copyText;document.body.appendChild(temp);temp.select();
+            if(!document.execCommand('copy')) throw new Error('Copy unavailable');temp.remove();
+          }
+          $('copy').textContent='✓ Итог скопирован';
+          setTimeout(()=>$('copy').textContent='Скопировать итог для WhatsApp',2300);
+        } catch(e) { $('copy').textContent='Не удалось скопировать';setTimeout(()=>$('copy').textContent='Скопировать итог для WhatsApp',2500); }
+      });
+      $('print').addEventListener('click',()=>window.print());
+      $('back').addEventListener('click',()=>$('entry').scrollIntoView({behavior:'smooth',block:'start'}));
+    })();
+  </script>
+</body>
+</html>
