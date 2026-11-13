@@ -76,7 +76,7 @@ input::placeholder{color:#a3aca3}.button{display:inline-flex;align-items:center;
   <div class="kicker">Личный трекер квалификации</div>
   <h1>Моя цель.<br><em>Мои 4 000 VP.</em></h1>
   <p class="intro">Два месяца, одна большая цель. Каждая запись приближает меня к результату.</p>
-  <div class="hero-bottom"><div><b id="periodHeading">Январь — февраль 2027</b><small>Накопительный учёт очков</small></div><span class="target-pill">Цель · 4 000 VP</span></div>
+  <div class="hero-bottom"><div><b id="periodHeading">Ноябрь — декабрь 2026</b><small>Накопительный учёт очков</small></div><span class="target-pill">Цель · 4 000 VP</span></div>
 </header>
 <div class="content">
  <section class="section">
@@ -97,8 +97,8 @@ input::placeholder{color:#a3aca3}.button{display:inline-flex;align-items:center;
   <div class="sectionhead"><h2>Два месяца к цели</h2></div>
   <p class="secsub">Ориентир — по 2 000 VP за месяц. Главное — общие 4 000 VP за выбранные два месяца.</p>
   <div class="months">
-   <div class="month"><span class="month-index">01 / Первый месяц</span><h3 id="month1Title">Январь</h3><div class="value"><span id="month1Total">0</span> <span>VP</span></div><div class="metainfo">Накоплено за месяц</div><div class="bar"><div class="fill" id="month1Bar"></div></div><div class="month-foot"><span id="month1Pct">0% от ориентира</span><span>2 000 VP</span></div></div>
-   <div class="month"><span class="month-index">02 / Второй месяц</span><h3 id="month2Title">Февраль</h3><div class="value"><span id="month2Total">0</span> <span>VP</span></div><div class="metainfo">Накоплено за месяц</div><div class="bar"><div class="fill" id="month2Bar"></div></div><div class="month-foot"><span id="month2Pct">0% от ориентира</span><span>2 000 VP</span></div></div>
+   <div class="month"><span class="month-index">01 / Первый месяц</span><h3 id="month1Title">Ноябрь</h3><div class="value"><span id="month1Total">0</span> <span>VP</span></div><div class="metainfo">Накоплено за месяц</div><div class="bar"><div class="fill" id="month1Bar"></div></div><div class="month-foot"><span id="month1Pct">0% от ориентира</span><span>2 000 VP</span></div></div>
+   <div class="month"><span class="month-index">02 / Второй месяц</span><h3 id="month2Title">Декабрь</h3><div class="value"><span id="month2Total">0</span> <span>VP</span></div><div class="metainfo">Накоплено за месяц</div><div class="bar"><div class="fill" id="month2Bar"></div></div><div class="month-foot"><span id="month2Pct">0% от ориентира</span><span>2 000 VP</span></div></div>
   </div>
   <div class="info-line"><span>До общей цели</span><strong id="needed">4 000 VP</strong></div>
  </section>
@@ -135,7 +135,7 @@ input::placeholder{color:#a3aca3}.button{display:inline-flex;align-items:center;
 (function(){
 'use strict';
 var GOAL=4000, GUIDE=2000, KEY='sakhayana-qual-4000-v1';
-var data={start:'2027-01',entries:[]},editId=null,toastTimer=null;
+var data={start:'2026-11',entries:[]},editId=null,toastTimer=null;
 var q=function(id){return document.getElementById(id);};
 var months=['январь','февраль','март','апрель','май','июнь','июль','август','сентябрь','октябрь','ноябрь','декабрь'];
 var monthTitle=['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
