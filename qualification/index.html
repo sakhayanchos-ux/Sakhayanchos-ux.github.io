@@ -148,7 +148,7 @@ function sum(arr){return arr.reduce(function(s,x){return s+Number(x.v);},0);}
 function within(d){return d.slice(0,7)===data.start || d.slice(0,7)===nextMonth(data.start);}
 function filteredEntries(){return data.entries.filter(function(x){return within(x.d);});}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(data));}catch(e){toast('Не удалось сохранить. Сделай резервную копию.');}}
-function load(){try{var raw=localStorage.getItem(KEY);if(raw){var x=JSON.parse(raw);if(x && /^\d{4}-\d{2}$/.test(x.start) && Array.isArray(x.entries)){data.start=x.start;data.entries=x.entries.filter(validEntry);}}}catch(e){console.warn(e);}}
+function load(){try{var raw=localStorage.getItem(KEY);if(raw){var x=JSON.parse(raw);if(x && /^\d{4}-\d{2}$/.test(x.start) && Array.isArray(x.entries)){data.start=(x.start==='2027-01'&&x.entries.length===0)?'2026-11':x.start;data.entries=x.entries.filter(validEntry);}}}catch(e){console.warn(e);}}
 function validEntry(x){return x && typeof x.d==='string' && /^\d{4}-\d{2}-\d{2}$/.test(x.d) && Number.isFinite(Number(x.v)) && Number(x.v)>0 && Number(x.v)<10000000 && typeof x.id==='string';}
 function toast(msg){var el=q('toast');el.textContent=msg;el.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(function(){el.classList.remove('show');},3100);}
 function startDate(){var today=new Date(),iso=today.getFullYear()+'-'+String(today.getMonth()+1).padStart(2,'0');return iso===data.start||iso===nextMonth(data.start)?today.getFullYear()+'-'+String(today.getMonth()+1).padStart(2,'0')+'-'+String(today.getDate()).padStart(2,'0'):data.start+'-01';}
