@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#12352d">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Мои 4000 VP">
+<meta name="description" content="Личный накопительный трекер квалификации Сахаяны: 4 000 VP за два месяца.">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="./icon.png">
+<title>Моя квалификация — 4 000 VP</title>
+<style>
+:root{--forest:#143a30;--forest2:#0b2925;--pine:#215b49;--gold:#caab70;--cream:#f7f7f1;--paper:#fffefa;--ink:#1e302b;--sub:#708078;--line:#e7e7dc;--red:#9e403e;--shadow:0 16px 38px rgba(32,48,37,.08)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f0f1e9;color:var(--ink);font:400 15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;-webkit-font-smoothing:antialiased}button,input,select{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--gold);outline-offset:3px}[hidden]{display:none!important}
+.page{max-width:570px;margin:0 auto;padding:0 0 calc(45px + env(safe-area-inset-bottom));background:#f7f8f3;min-height:100svh;box-shadow:0 0 70px rgba(25,45,33,.09)}
+.hero{position:relative;overflow:hidden;padding:28px 26px 31px;background:radial-gradient(circle at 110% -7%,rgba(230,197,131,.22),transparent 39%),radial-gradient(circle at -12% 95%,rgba(70,136,104,.40),transparent 43%),linear-gradient(145deg,#173d32,#0c2827 90%);color:#fff}
+.hero:after{content:"";position:absolute;right:-95px;top:60px;height:310px;width:310px;border:1px solid rgba(227,209,167,.21);border-radius:50%;box-shadow:0 0 0 34px rgba(227,209,167,.05),0 0 0 68px rgba(227,209,167,.035);pointer-events:none}
+.hero:before{content:"";position:absolute;right:42px;top:132px;width:5px;height:5px;background:#e5cb91;box-shadow:31px -42px 0 -1px #e5cb91,-38px 53px 0 -1px #e5cb91;transform:rotate(22deg)}
+.hero>*{position:relative;z-index:1}
+.topline{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;align-items:center;gap:10px;letter-spacing:.16em;font-size:10px;font-weight:700;color:#e9e2cb;text-transform:uppercase}
+.mark{display:grid;place-items:center;width:35px;height:35px;border:1px solid rgba(248,232,188,.6);border-radius:50%;font:500 14px/1 Georgia,serif;color:#f4ddb0;letter-spacing:-.07em}
+.personal{font-size:10px;color:#d4d6ca;border:1px solid rgba(255,255,255,.25);border-radius:20px;padding:6px 10px;white-space:nowrap}
+.kicker{margin:35px 0 6px;color:#d8bd80;font-size:10px;letter-spacing:.27em;text-transform:uppercase;font-weight:750}
+.hero h1{font:400 clamp(31px,8.8vw,44px)/1.04 Georgia,"Times New Roman",serif;letter-spacing:-.04em;margin:0;max-width:430px}
+.hero h1 em{font-style:italic;color:#dfceac}
+.intro{max-width:320px;font-size:13px;color:#d4ded7;margin:17px 0 27px}
+.hero-bottom{display:flex;justify-content:space-between;align-items:end;gap:14px;padding-top:17px;border-top:1px solid rgba(255,255,255,.19)}
+.hero-bottom b{display:block;font-size:11px;font-weight:650;letter-spacing:.04em;color:#fff}.hero-bottom small{display:block;font-size:11px;color:#abc4b7;margin-top:4px}
+.target-pill{border:1px solid rgba(219,190,132,.5);background:rgba(219,190,132,.08);padding:9px 14px;border-radius:100px;color:#ead2a0;font-size:11px;white-space:nowrap}
+.content{padding:22px 18px 0}.section{margin-bottom:18px}
+.card{background:var(--paper);border:1px solid #eeefe7;border-radius:19px;box-shadow:var(--shadow);padding:21px}
+.overline{font-size:10px;letter-spacing:.17em;text-transform:uppercase;color:#858f85;font-weight:800}
+.sectionhead{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:0 3px 12px}
+.sectionhead h2{margin:0;font-size:20px;font-weight:650;letter-spacing:-.04em}
+.secsub{font-size:12px;color:var(--sub);margin:0 3px 13px}
+.overview{padding:22px 21px}
+.overview-main{display:flex;align-items:center;gap:19px}
+.dial{width:158px;height:158px;flex:0 0 158px;border-radius:50%;background:conic-gradient(#d2af70 0%,#ebeee6 0%);padding:13px;transition:background .4s}
+.dial-inner{height:100%;width:100%;border-radius:50%;background:#fffcf7;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.dial-number{font:400 35px/1 Georgia,serif;color:var(--forest);letter-spacing:-.05em}.dial-unit{font-size:10px;letter-spacing:.13em;color:var(--sub);margin-top:4px}
+.stats{flex:1;min-width:0}.stats .big{font:400 clamp(29px,7vw,38px)/1.1 Georgia,serif;color:#183f34;letter-spacing:-.035em;margin-top:7px;white-space:nowrap}.stats .big span{font-size:13px;font-family:Arial,sans-serif;color:var(--sub);letter-spacing:0}
+.stats .divider{height:1px;background:#e9e8e1;margin:14px 0 13px}.stats .remaining{font-size:24px;font-weight:650;line-height:1.25;letter-spacing:-.04em;color:#183f34}.stats small{font-size:11px;color:var(--sub)}
+.reward{display:flex;align-items:flex-start;gap:10px;background:#f1f5eb;border-radius:11px;padding:13px 14px;margin-top:19px;color:#3b604e;font-size:12px}
+.reward i{width:8px;height:8px;border:2px solid var(--pine);transform:rotate(45deg);flex:0 0 8px;margin-top:4px}
+.months{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.month{background:#fffefa;border:1px solid #e8eae1;border-radius:15px;padding:18px 15px 17px;box-shadow:0 7px 23px rgba(32,48,37,.035)}
+.month-index{font:italic 15px Georgia,serif;color:#a49272}.month h3{font-size:17px;font-weight:650;margin:7px 0 3px;letter-spacing:-.035em}.month .value{font:400 29px Georgia,serif;color:#183e33;letter-spacing:-.04em;margin:12px 0 2px}.month .value span{font:400 11px Arial,sans-serif;color:#778378}.month .metainfo{font-size:11px;color:#899287}.bar{height:7px;border-radius:10px;background:#eaece4;margin-top:14px;overflow:hidden}.fill{height:100%;width:0;background:linear-gradient(90deg,#2c7454,#b3a06f);border-radius:10px;transition:width .35s}.month-foot{display:flex;justify-content:space-between;color:#718076;font-size:10px;margin-top:8px}
+.info-line{display:flex;justify-content:space-between;gap:14px;align-items:center;background:#edf2e9;border:1px solid #e4e9df;padding:11px 13px;margin-top:11px;border-radius:12px;font-size:11px;color:#52685c}
+.info-line strong{color:#214b3a;font-size:12px}
+form{margin:0}.fieldgroup{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.field{display:flex;flex-direction:column;gap:6px;margin-bottom:13px}.field label{font-size:11px;color:#68776d;font-weight:750;letter-spacing:.02em}
+.field input,.field select{min-width:0;width:100%;border:1px solid #dfe4d8;background:#fcfdf9;border-radius:10px;min-height:46px;padding:11px 13px;color:var(--ink);outline:none}
+.field input:focus,.field select:focus{border-color:#3d8c69;box-shadow:0 0 0 3px rgba(63,128,95,.11)}
+input::placeholder{color:#a3aca3}.button{display:inline-flex;align-items:center;justify-content:center;border-radius:11px;min-height:46px;padding:12px 18px;border:1px solid transparent;font-size:13px;font-weight:750;letter-spacing:.01em;transition:transform .15s,background .15s}
+.button:active{transform:scale(.985)}.primary{background:#1f5a43;color:white;width:100%}.primary:hover{background:#174b38}.secondary{background:#fff;color:#2a5641;border-color:#d9e2d6}.danger{color:#a74b48;background:#fff7f6;border-color:#f2d9d5}.small-btn{min-height:34px;padding:7px 11px;font-size:11px}
+.actions{display:flex;gap:8px;flex-wrap:wrap}
+.entries-empty{text-align:center;padding:27px 12px;color:#94a097;font-size:12px;background:#f7f9f4;border:1px dashed #dce2d5;border-radius:12px}
+.entry{display:flex;align-items:center;gap:8px;padding:12px 0;border-bottom:1px solid #eceee8}.entry:last-child{border-bottom:0}.entry .dot{width:7px;height:7px;background:#c9aa72;border-radius:50%;flex:0 0 7px}
+.entry .detail{flex:1;min-width:0}.entry .entry-date{font-size:11px;color:#849187}.entry .desc{font-size:12px;color:#334c3f;overflow-wrap:anywhere}.entry .pts{font-size:16px;font-weight:750;white-space:nowrap;color:#23553e}.entry .edit{border:1px solid #e4e8df;background:#fff;border-radius:8px;color:#506a5a;padding:6px 7px;font-size:10px}
+.entry .delete{border:0;background:transparent;color:#ad8b89;font-size:21px;padding:1px 5px;line-height:1.4}
+.entry-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}.entry-head h3{font-size:15px;margin:0}.entry-head select{max-width:150px;width:auto;min-height:37px;padding:7px 8px;border:1px solid #e4e8e0;border-radius:9px;color:#365b46;background:#fff}
+.tools{border-top:1px solid #e9ede6;margin-top:16px;padding-top:15px}.tools summary{cursor:pointer;color:#406b55;font-size:12px;font-weight:700;list-style:none;display:flex;align-items:center;justify-content:space-between}.tools summary:after{content:"+";font-size:18px}.tools[open] summary:after{content:"−"}
+.tools p{font-size:11px;color:#6f7c70}.controls{display:flex;gap:8px;flex-wrap:wrap;margin-top:13px}.controls .button{flex:1}.settings{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:end;margin-top:17px}.settings .field{margin:0}
+.footer{text-align:center;padding:11px 20px 20px;color:#8a978b;font-size:11px}.footer b{font-weight:600;color:#54715b}.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom));z-index:20;transform:translate(-50%,30px);opacity:0;pointer-events:none;background:#163e31;color:#fff;font-size:12px;border-radius:100px;padding:12px 21px;box-shadow:0 9px 30px rgba(0,0,0,.18);transition:.25s;white-space:nowrap;max-width:90vw;text-overflow:ellipsis;overflow:hidden}.toast.show{transform:translate(-50%,0);opacity:1}
+@media(max-width:415px){.content{padding:16px 12px 0}.hero{padding:24px 20px 28px}.overview{padding:18px 15px}.overview-main{gap:13px}.dial{width:140px;height:140px;flex-basis:140px;padding:11px}.dial-number{font-size:30px}.stats .big{font-size:28px}.stats .remaining{font-size:21px}.month{padding:15px 12px}.month h3{font-size:15px}.month .value{font-size:26px}.card{padding:18px 16px}}@media(max-width:348px){.overview-main{flex-direction:column}.dial{width:155px;flex-basis:auto;height:155px}.stats{width:100%}.stats .divider{margin:10px 0}.month h3{font-size:13px}.months{gap:7px}.month{padding:12px 9px}.month .value{font-size:24px}.hero-bottom{flex-wrap:wrap}}@media(prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important}}
+</style>
+</head>
+<body>
+<main class="page">
+<header class="hero">
+  <div class="topline"><div class="brand"><div class="mark">SS</div><span>Мой личный путь</span></div><span class="personal">Сахаяна Скрябина</span></div>
+  <div class="kicker">Личный трекер квалификации</div>
+  <h1>Моя цель.<br><em>Мои 4 000 VP.</em></h1>
+  <p class="intro">Два месяца, одна большая цель. Каждая запись приближает меня к результату.</p>
+  <div class="hero-bottom"><div><b id="periodHeading">Январь — февраль 2027</b><small>Накопительный учёт очков</small></div><span class="target-pill">Цель · 4 000 VP</span></div>
+</header>
+<div class="content">
+ <section class="section">
+  <div class="card overview">
+   <div class="overline">Общий прогресс</div>
+   <div class="overview-main" style="margin-top:12px">
+    <div class="dial" id="dial" role="progressbar" aria-valuemin="0" aria-valuemax="4000" aria-valuenow="0" aria-label="Накоплено очков"><div class="dial-inner"><span class="dial-number" id="pct">0%</span><span class="dial-unit">ПРОЙДЕНО</span></div></div>
+    <div class="stats">
+     <div class="overline">Накоплено</div><div class="big"><strong id="total">0</strong> <span>VP</span></div>
+     <div class="divider"></div>
+     <small>Осталось до цели</small><div class="remaining" id="remain">4 000 VP</div>
+    </div>
+   </div>
+   <div class="reward" id="motivation"><i></i><span>Большой результат складывается из маленьких ежедневных действий.</span></div>
+  </div>
+ </section>
+ <section class="section">
+  <div class="sectionhead"><h2>Два месяца к цели</h2></div>
+  <p class="secsub">Ориентир — по 2 000 VP за месяц. Главное — общие 4 000 VP за выбранные два месяца.</p>
+  <div class="months">
+   <div class="month"><span class="month-index">01 / Первый месяц</span><h3 id="month1Title">Январь</h3><div class="value"><span id="month1Total">0</span> <span>VP</span></div><div class="metainfo">Накоплено за месяц</div><div class="bar"><div class="fill" id="month1Bar"></div></div><div class="month-foot"><span id="month1Pct">0% от ориентира</span><span>2 000 VP</span></div></div>
+   <div class="month"><span class="month-index">02 / Второй месяц</span><h3 id="month2Title">Февраль</h3><div class="value"><span id="month2Total">0</span> <span>VP</span></div><div class="metainfo">Накоплено за месяц</div><div class="bar"><div class="fill" id="month2Bar"></div></div><div class="month-foot"><span id="month2Pct">0% от ориентира</span><span>2 000 VP</span></div></div>
+  </div>
+  <div class="info-line"><span>До общей цели</span><strong id="needed">4 000 VP</strong></div>
+ </section>
+ <section class="section" id="addSection">
+  <div class="sectionhead"><h2 id="formHeading">Записать очки</h2><span class="overline">Мой результат</span></div>
+  <div class="card">
+   <form id="entryForm" novalidate>
+    <div class="fieldgroup"><div class="field"><label for="date">Дата</label><input id="date" type="date" required></div><div class="field"><label for="points">Очки, VP</label><input id="points" type="text" inputmode="decimal" placeholder="Например, 125" required autocomplete="off"></div></div>
+    <div class="field"><label for="comment">За что начислены очки <span style="font-weight:400">(необязательно)</span></label><input id="comment" type="text" maxlength="160" placeholder="Заказ, клиент, личный объём..." autocomplete="off"></div>
+    <button class="button primary" id="submitBtn" type="submit">Добавить к моей цели</button><button class="button secondary" id="cancelEdit" type="button" style="width:100%;margin-top:8px" hidden>Отменить изменение</button>
+   </form>
+  </div>
+ </section>
+ <section class="section">
+  <div class="sectionhead"><h2>История моих очков</h2><span class="overline" id="entriesCount">0 записей</span></div>
+  <div class="card">
+   <div class="entry-head"><h3>Все начисления</h3><select id="filter" aria-label="Фильтр записей"><option value="all">Оба месяца</option><option value="1">Первый месяц</option><option value="2">Второй месяц</option></select></div>
+   <div id="entries"></div>
+   <details class="tools">
+    <summary>Настройки и резервная копия</summary>
+    <div class="settings"><div class="field"><label for="startMonth">Первый месяц квалификации</label><input type="month" id="startMonth" min="2026-01" max="2032-12"></div><button type="button" class="button secondary small-btn" id="setMonth">Применить</button></div>
+    <p>Два месяца идут подряд. Выбранный период можно изменить. Старые записи не удаляются, даже если их даты окажутся вне нового периода.</p>
+    <div class="controls"><button type="button" class="button secondary small-btn" id="backup">Сохранить копию</button><button type="button" class="button secondary small-btn" id="restore">Восстановить</button></div>
+    <input type="file" id="restoreFile" accept=".json,application/json" hidden>
+    <div class="controls"><button type="button" class="button danger small-btn" id="clearAll">Удалить все записи</button></div>
+   </details>
+  </div>
+ </section>
+</div>
+<footer class="footer">Мой путь к результату. <b>Шаг за шагом, VP за VP.</b><br>Записи сохраняются в браузере на этом устройстве.</footer>
+</main>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+(function(){
+'use strict';
+var GOAL=4000, GUIDE=2000, KEY='sakhayana-qual-4000-v1';
+var data={start:'2027-01',entries:[]},editId=null,toastTimer=null;
+var q=function(id){return document.getElementById(id);};
+var months=['январь','февраль','март','апрель','май','июнь','июль','август','сентябрь','октябрь','ноябрь','декабрь'];
+var monthTitle=['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
+var fmt=new Intl.NumberFormat('ru-RU',{maximumFractionDigits:2});
+var nf=function(n){return fmt.format(Math.round((Number(n)||0)*100)/100);};
+function nextMonth(m){var a=m.split('-').map(Number),d=new Date(a[0],a[1],1);return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0');}
+function monthName(m,capital){var a=m.split('-'),i=+a[1]-1;return (capital?monthTitle[i]:months[i])+' '+a[0];}
+function periodName(){var m2=nextMonth(data.start);return monthTitle[+data.start.slice(5)-1]+' — '+months[+m2.slice(5)-1]+' '+m2.slice(0,4);}
+function sum(arr){return arr.reduce(function(s,x){return s+Number(x.v);},0);}
+function within(d){return d.slice(0,7)===data.start || d.slice(0,7)===nextMonth(data.start);}
+function filteredEntries(){return data.entries.filter(function(x){return within(x.d);});}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(data));}catch(e){toast('Не удалось сохранить. Сделай резервную копию.');}}
+function load(){try{var raw=localStorage.getItem(KEY);if(raw){var x=JSON.parse(raw);if(x && /^\d{4}-\d{2}$/.test(x.start) && Array.isArray(x.entries)){data.start=x.start;data.entries=x.entries.filter(validEntry);}}}catch(e){console.warn(e);}}
+function validEntry(x){return x && typeof x.d==='string' && /^\d{4}-\d{2}-\d{2}$/.test(x.d) && Number.isFinite(Number(x.v)) && Number(x.v)>0 && Number(x.v)<10000000 && typeof x.id==='string';}
+function toast(msg){var el=q('toast');el.textContent=msg;el.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(function(){el.classList.remove('show');},3100);}
+function startDate(){var today=new Date(),iso=today.getFullYear()+'-'+String(today.getMonth()+1).padStart(2,'0');return iso===data.start||iso===nextMonth(data.start)?today.getFullYear()+'-'+String(today.getMonth()+1).padStart(2,'0')+'-'+String(today.getDate()).padStart(2,'0'):data.start+'-01';}
+function setDefaultDate(){q('date').value=startDate();}
+function dateShort(d){var a=d.split('-');return a[2]+'.'+a[1]+'.'+a[0];}
+function render(){
+ var m1=data.start,m2=nextMonth(m1),active=filteredEntries(),v1=sum(active.filter(function(x){return x.d.slice(0,7)===m1;})),v2=sum(active.filter(function(x){return x.d.slice(0,7)===m2;})),all=v1+v2,p=Math.min(100,all/GOAL*100);
+ q('periodHeading').textContent=periodName();q('total').textContent=nf(all);q('remain').textContent=nf(Math.max(0,GOAL-all))+' VP';q('needed').textContent=nf(Math.max(0,GOAL-all))+' VP';
+ q('pct').textContent=Math.round(all/GOAL*100)+'%';q('dial').style.background='conic-gradient(#d3ac68 '+p+'%,#e8eae1 '+p+'%)';q('dial').setAttribute('aria-valuenow',String(Math.min(GOAL,all)));
+ q('month1Title').textContent=monthName(m1,true);q('month2Title').textContent=monthName(m2,true);
+ [[1,v1],[2,v2]].forEach(function(item){var k=item[0],v=item[1],p=Math.round(v/GUIDE*100);q('month'+k+'Total').textContent=nf(v);q('month'+k+'Pct').textContent=p+'% от ориентира';q('month'+k+'Bar').style.width=Math.min(100,p)+'%';});
+ q('motivation').querySelector('span').textContent=all>=GOAL?'Цель 4 000 VP достигнута! Ты выполнила свой план по накопительным очкам.':all>=3000?'Финишная прямая. Осталось совсем немного до 4 000 VP.':all>=2000?'Половина пути позади. Продолжай в своём темпе.':'Большой результат складывается из маленьких ежедневных действий.';
+ q('startMonth').value=data.start;q('entriesCount').textContent=active.length+' '+(active.length%10===1&&active.length%100!==11?'запись':([2,3,4].includes(active.length%10)&&![12,13,14].includes(active.length%100)?'записи':'записей'));
+ q('date').min=m1+'-01';q('date').max=m2+'-'+String(new Date(+m2.slice(0,4),+m2.slice(5),0).getDate()).padStart(2,'0');
+ var filter=q('filter').value,arr=active.filter(function(x){return filter==='all'||x.d.slice(0,7)===(filter==='1'?m1:m2);}).sort(function(a,b){return b.d.localeCompare(a.d)||(b.created||0)-(a.created||0);});
+ var box=q('entries');box.replaceChildren();
+ if(!arr.length){var blank=document.createElement('div');blank.className='entries-empty';blank.textContent=filter==='all'?'Пока нет записей. Добавь первые очки — и они появятся здесь.':'В этом месяце ещё нет записей.';box.appendChild(blank);}
+ else arr.forEach(function(x){
+  var row=document.createElement('div');row.className='entry';
+  var dot=document.createElement('span');dot.className='dot';row.appendChild(dot);
+  var detail=document.createElement('div');detail.className='detail';var dt=document.createElement('div');dt.className='entry-date';dt.textContent=dateShort(x.d);detail.appendChild(dt);
+  if(x.c){var ds=document.createElement('div');ds.className='desc';ds.textContent=x.c;detail.appendChild(ds);}row.appendChild(detail);
+  var val=document.createElement('strong');val.className='pts';val.textContent='+'+nf(x.v);row.appendChild(val);
+  var ed=document.createElement('button');ed.type='button';ed.className='edit';ed.textContent='Изм.';ed.setAttribute('aria-label','Изменить запись');ed.onclick=function(){edit(x.id);};row.appendChild(ed);
+  var del=document.createElement('button');del.type='button';del.className='delete';del.textContent='×';del.setAttribute('aria-label','Удалить запись');del.onclick=function(){remove(x.id);};row.appendChild(del);box.appendChild(row);
+ });
+}
+function cancel(){editId=null;q('formHeading').textContent='Записать очки';q('submitBtn').textContent='Добавить к моей цели';q('cancelEdit').hidden=true;q('entryForm').reset();setDefaultDate();}
+function edit(id){var x=data.entries.find(function(a){return a.id===id;});if(!x)return;editId=x.id;q('date').value=x.d;q('points').value=String(x.v).replace('.',',');q('comment').value=x.c||'';q('formHeading').textContent='Изменить запись';q('submitBtn').textContent='Сохранить изменения';q('cancelEdit').hidden=false;q('addSection').scrollIntoView({behavior:'smooth',block:'start'});}
+function remove(id){if(!confirm('Удалить эту запись?'))return;data.entries=data.entries.filter(function(x){return x.id!==id;});if(editId===id)cancel();save();render();toast('Запись удалена');}
+q('entryForm').addEventListener('submit',function(e){e.preventDefault();var d=q('date').value,v=Number(q('points').value.replace(/\s/g,'').replace(',','.')),c=q('comment').value.trim();if(!d || !within(d)){toast('Выбери дату внутри двух месяцев');q('date').focus();return;}if(!Number.isFinite(v)||v<=0||v>=10000000){toast('Укажи положительное количество VP');q('points').focus();return;}v=Math.round(v*100)/100;if(editId){var existing=data.entries.find(function(x){return x.id===editId;});if(existing){existing.d=d;existing.v=v;existing.c=c;}}else{data.entries.push({id:String(Date.now())+'-'+Math.random().toString(36).slice(2,9),d:d,v:v,c:c,created:Date.now()});}save();cancel();render();toast('Очки учтены. Прогресс обновлён.');});
+q('cancelEdit').onclick=cancel;q('filter').onchange=render;
+q('setMonth').onclick=function(){var m=q('startMonth').value;if(!/^\d{4}-\d{2}$/.test(m)){toast('Укажи месяц');return;}if(m===data.start){toast('Этот период уже выбран');return;}var old=filteredEntries().length;if(old>0&&!confirm('Сменить месяцы квалификации? Предыдущие записи сохранятся, но в новом периоде будут отображаться только подходящие даты.'))return;data.start=m;cancel();save();render();toast('Период обновлён');};
+q('backup').onclick=function(){var payload=JSON.stringify({app:'qualification-4000',version:1,exported:new Date().toISOString(),data:data},null,2);var blob=new Blob([payload],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='moi-4000-vp-'+new Date().toISOString().slice(0,10)+'.json';document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(url);},2000);toast('Резервная копия готова');};
+q('restore').onclick=function(){q('restoreFile').click();};
+q('restoreFile').onchange=async function(e){var file=e.target.files&&e.target.files[0];if(!file)return;try{var v=JSON.parse(await file.text()),x=v.data||v;if(!/^\d{4}-\d{2}$/.test(x.start)||!Array.isArray(x.entries)||!x.entries.every(validEntry))throw Error('Неверный файл');if(!confirm('Восстановить записи из файла? Текущие данные будут заменены.'))return;data={start:x.start,entries:x.entries};save();cancel();render();toast('Данные восстановлены');}catch(err){toast('Не удалось прочитать файл копии');}finally{e.target.value='';}};
+q('clearAll').onclick=function(){if(!data.entries.length){toast('Записей пока нет');return;}if(!confirm('Удалить ВСЕ записи? Перед удалением советую сохранить копию.'))return;data.entries=[];save();cancel();render();toast('Все записи удалены');};
+load();setDefaultDate();render();
+})();
+</script>
+</body>
+</html>
