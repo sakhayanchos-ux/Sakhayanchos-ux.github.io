@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+<defs><linearGradient id="a" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#215844"/><stop offset="1" stop-color="#0c2d28"/></linearGradient></defs>
+<rect width="512" height="512" rx="118" fill="url(#a)"/>
+<circle cx="256" cy="252" r="187" stroke="#ceb47b" stroke-width="5" fill="none"/>
+<circle cx="256" cy="252" r="173" stroke="#ceb47b" stroke-opacity=".25" stroke-width="2" fill="none"/>
+<text x="256" y="255" fill="#fff8e8" text-anchor="middle" font-family="Georgia,serif" font-size="122" font-weight="400" letter-spacing="-6">4000</text>
+<path d="M176 290h160" stroke="#ceb47b" stroke-width="3"/>
+<text x="256" y="345" fill="#d8c18d" text-anchor="middle" font-family="Arial,sans-serif" font-size="45" letter-spacing="14">VP</text>
+</svg>
