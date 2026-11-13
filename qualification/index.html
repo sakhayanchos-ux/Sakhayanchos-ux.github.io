@@ -135,7 +135,7 @@ input::placeholder{color:#a3aca3}.button{display:inline-flex;align-items:center;
 (function(){
 'use strict';
 var GOAL=4000, GUIDE=2000, KEY='sakhayana-qual-4000-v1';
-var data={start:'2026-11',entries:[]},editId=null,toastTimer=null;
+var data={start:'2026-11',entries:[]},editId=null,toastTimer=null,lastAutoDate='';
 var q=function(id){return document.getElementById(id);};
 var months=['январь','февраль','март','апрель','май','июнь','июль','август','сентябрь','октябрь','ноябрь','декабрь'];
 var monthTitle=['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
@@ -148,11 +148,12 @@ function sum(arr){return arr.reduce(function(s,x){return s+Number(x.v);},0);}
 function within(d){return d.slice(0,7)===data.start || d.slice(0,7)===nextMonth(data.start);}
 function filteredEntries(){return data.entries.filter(function(x){return within(x.d);});}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(data));}catch(e){toast('Не удалось сохранить. Сделай резервную копию.');}}
-function load(){try{var raw=localStorage.getItem(KEY);if(raw){var x=JSON.parse(raw);if(x && /^\d{4}-\d{2}$/.test(x.start) && Array.isArray(x.entries)){data.start=(x.start==='2027-01'&&x.entries.length===0)?'2026-11':x.start;data.entries=x.entries.filter(validEntry);}}}catch(e){console.warn(e);}}
+function load(){try{var raw=localStorage.getItem(KEY);if(raw){var x=JSON.parse(raw);if(x && /^\d{4}-\d{2}$/.test(x.start) && Array.isArray(x.entries)){data.start=x.start==='2027-01'?'2026-11':x.start;data.entries=x.entries.filter(validEntry);}}}catch(e){console.warn(e);}}
 function validEntry(x){return x && typeof x.d==='string' && /^\d{4}-\d{2}-\d{2}$/.test(x.d) && Number.isFinite(Number(x.v)) && Number(x.v)>0 && Number(x.v)<10000000 && typeof x.id==='string';}
 function toast(msg){var el=q('toast');el.textContent=msg;el.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(function(){el.classList.remove('show');},3100);}
-function startDate(){var today=new Date(),iso=today.getFullYear()+'-'+String(today.getMonth()+1).padStart(2,'0');return iso===data.start||iso===nextMonth(data.start)?today.getFullYear()+'-'+String(today.getMonth()+1).padStart(2,'0')+'-'+String(today.getDate()).padStart(2,'0'):data.start+'-01';}
-function setDefaultDate(){q('date').value=startDate();}
+function startDate(){var today=new Date();return today.getFullYear()+'-'+String(today.getMonth()+1).padStart(2,'0')+'-'+String(today.getDate()).padStart(2,'0');}
+function setDefaultDate(){lastAutoDate=startDate();q('date').value=lastAutoDate;}
+function refreshDateIfNeeded(){if(!editId && q('date').value===lastAutoDate && startDate()!==lastAutoDate)setDefaultDate();}
 function dateShort(d){var a=d.split('-');return a[2]+'.'+a[1]+'.'+a[0];}
 function render(){
  var m1=data.start,m2=nextMonth(m1),active=filteredEntries(),v1=sum(active.filter(function(x){return x.d.slice(0,7)===m1;})),v2=sum(active.filter(function(x){return x.d.slice(0,7)===m2;})),all=v1+v2,p=Math.min(100,all/GOAL*100);
@@ -186,7 +187,7 @@ q('backup').onclick=function(){var payload=JSON.stringify({app:'qualification-40
 q('restore').onclick=function(){q('restoreFile').click();};
 q('restoreFile').onchange=async function(e){var file=e.target.files&&e.target.files[0];if(!file)return;try{var v=JSON.parse(await file.text()),x=v.data||v;if(!/^\d{4}-\d{2}$/.test(x.start)||!Array.isArray(x.entries)||!x.entries.every(validEntry))throw Error('Неверный файл');if(!confirm('Восстановить записи из файла? Текущие данные будут заменены.'))return;data={start:x.start,entries:x.entries};save();cancel();render();toast('Данные восстановлены');}catch(err){toast('Не удалось прочитать файл копии');}finally{e.target.value='';}};
 q('clearAll').onclick=function(){if(!data.entries.length){toast('Записей пока нет');return;}if(!confirm('Удалить ВСЕ записи? Перед удалением советую сохранить копию.'))return;data.entries=[];save();cancel();render();toast('Все записи удалены');};
-load();setDefaultDate();render();if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('./sw.js').catch(function(){});});}
+load();setDefaultDate();render();document.addEventListener('visibilitychange',function(){if(!document.hidden)refreshDateIfNeeded();});window.addEventListener('focus',refreshDateIfNeeded);if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('./sw.js').catch(function(){});});}
 })();
 </script>
 </body>
