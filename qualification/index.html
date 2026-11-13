@@ -186,7 +186,7 @@ q('backup').onclick=function(){var payload=JSON.stringify({app:'qualification-40
 q('restore').onclick=function(){q('restoreFile').click();};
 q('restoreFile').onchange=async function(e){var file=e.target.files&&e.target.files[0];if(!file)return;try{var v=JSON.parse(await file.text()),x=v.data||v;if(!/^\d{4}-\d{2}$/.test(x.start)||!Array.isArray(x.entries)||!x.entries.every(validEntry))throw Error('Неверный файл');if(!confirm('Восстановить записи из файла? Текущие данные будут заменены.'))return;data={start:x.start,entries:x.entries};save();cancel();render();toast('Данные восстановлены');}catch(err){toast('Не удалось прочитать файл копии');}finally{e.target.value='';}};
 q('clearAll').onclick=function(){if(!data.entries.length){toast('Записей пока нет');return;}if(!confirm('Удалить ВСЕ записи? Перед удалением советую сохранить копию.'))return;data.entries=[];save();cancel();render();toast('Все записи удалены');};
-load();setDefaultDate();render();
+load();setDefaultDate();render();if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('./sw.js').catch(function(){});});}
 })();
 </script>
 </body>
