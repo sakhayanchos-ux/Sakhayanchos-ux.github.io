@@ -1,0 +1,19 @@
+{
+  "id": "/qualification/",
+  "name": "Моя квалификация — 4 000 VP",
+  "short_name": "Мои 4000 VP",
+  "description": "Личный накопительный трекер Сахаяны — 4 000 VP за два месяца",
+  "start_url": "/qualification/",
+  "scope": "/qualification/",
+  "display": "standalone",
+  "background_color": "#f7f8f3",
+  "theme_color": "#143a30",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
