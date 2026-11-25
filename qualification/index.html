@@ -49,7 +49,7 @@
 .months{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .month{background:#fffefa;border:1px solid #e8eae1;border-radius:15px;padding:18px 15px 17px;box-shadow:0 7px 23px rgba(32,48,37,.035)}
 .month-index{font:italic 15px Georgia,serif;color:#a49272}.month h3{font-size:17px;font-weight:650;margin:7px 0 3px;letter-spacing:-.035em}.month .value{font:400 29px Georgia,serif;color:#183e33;letter-spacing:-.04em;margin:12px 0 2px}.month .value span{font:400 11px Arial,sans-serif;color:#778378}.month .metainfo{font-size:11px;color:#899287}.bar{height:7px;border-radius:10px;background:#eaece4;margin-top:14px;overflow:hidden}.fill{height:100%;width:0;background:linear-gradient(90deg,#2c7454,#b3a06f);border-radius:10px;transition:width .35s}.month-foot{display:flex;justify-content:space-between;color:#718076;font-size:10px;margin-top:8px}
-.info-line{display:flex;justify-content:space-between;gap:14px;align-items:center;background:#edf2e9;border:1px solid #e4e9df;padding:11px 13px;margin-top:11px;border-radius:12px;font-size:11px;color:#52685c}
+.month-remain{display:flex;flex-direction:column;gap:3px;border-top:1px solid #e8eae1;margin-top:12px;padding-top:10px;color:var(--sub);font-size:11px}.month-remain strong{font-size:17px;font-weight:750;color:#214b3a;letter-spacing:-.025em;white-space:nowrap}.info-line{display:flex;justify-content:space-between;gap:14px;align-items:center;background:#edf2e9;border:1px solid #e4e9df;padding:11px 13px;margin-top:11px;border-radius:12px;font-size:11px;color:#52685c}
 .info-line strong{color:#214b3a;font-size:12px}
 form{margin:0}.fieldgroup{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
 .field{display:flex;flex-direction:column;gap:6px;margin-bottom:13px}.field label{font-size:11px;color:#68776d;font-weight:750;letter-spacing:.02em}
@@ -97,8 +97,8 @@ input::placeholder{color:#a3aca3}.button{display:inline-flex;align-items:center;
   <div class="sectionhead"><h2>Два месяца к цели</h2></div>
   <p class="secsub">Ориентир — по 2 000 VP за месяц. Главное — общие 4 000 VP за выбранные два месяца.</p>
   <div class="months">
-   <div class="month"><span class="month-index">01 / Первый месяц</span><h3 id="month1Title">Ноябрь</h3><div class="value"><span id="month1Total">0</span> <span>VP</span></div><div class="metainfo">Накоплено за месяц</div><div class="bar"><div class="fill" id="month1Bar"></div></div><div class="month-foot"><span id="month1Pct">0% от ориентира</span><span>2 000 VP</span></div></div>
-   <div class="month"><span class="month-index">02 / Второй месяц</span><h3 id="month2Title">Декабрь</h3><div class="value"><span id="month2Total">0</span> <span>VP</span></div><div class="metainfo">Накоплено за месяц</div><div class="bar"><div class="fill" id="month2Bar"></div></div><div class="month-foot"><span id="month2Pct">0% от ориентира</span><span>2 000 VP</span></div></div>
+   <div class="month"><span class="month-index">01 / Первый месяц</span><h3 id="month1Title">Ноябрь</h3><div class="value"><span id="month1Total">0</span> <span>VP</span></div><div class="metainfo">Накоплено за месяц</div><div class="bar"><div class="fill" id="month1Bar"></div></div><div class="month-foot"><span id="month1Pct">0% от ориентира</span><span>2 000 VP</span></div><div class="month-remain"><span>Осталось до цели</span><strong id="month1Remain">2 000 VP</strong></div></div>
+   <div class="month"><span class="month-index">02 / Второй месяц</span><h3 id="month2Title">Декабрь</h3><div class="value"><span id="month2Total">0</span> <span>VP</span></div><div class="metainfo">Накоплено за месяц</div><div class="bar"><div class="fill" id="month2Bar"></div></div><div class="month-foot"><span id="month2Pct">0% от ориентира</span><span>2 000 VP</span></div><div class="month-remain"><span>Осталось до цели</span><strong id="month2Remain">2 000 VP</strong></div></div>
   </div>
   <div class="info-line"><span>До общей цели</span><strong id="needed">4 000 VP</strong></div>
  </section>
@@ -160,7 +160,7 @@ function render(){
  q('periodHeading').textContent=periodName();q('total').textContent=nf(all);q('remain').textContent=nf(Math.max(0,GOAL-all))+' VP';q('needed').textContent=nf(Math.max(0,GOAL-all))+' VP';
  q('pct').textContent=Math.round(all/GOAL*100)+'%';q('dial').style.background='conic-gradient(#d3ac68 '+p+'%,#e8eae1 '+p+'%)';q('dial').setAttribute('aria-valuenow',String(Math.min(GOAL,all)));
  q('month1Title').textContent=monthName(m1,true);q('month2Title').textContent=monthName(m2,true);
- [[1,v1],[2,v2]].forEach(function(item){var k=item[0],v=item[1],p=Math.round(v/GUIDE*100);q('month'+k+'Total').textContent=nf(v);q('month'+k+'Pct').textContent=p+'% от ориентира';q('month'+k+'Bar').style.width=Math.min(100,p)+'%';});
+ [[1,v1],[2,v2]].forEach(function(item){var k=item[0],v=item[1],p=Math.round(v/GUIDE*100);q('month'+k+'Total').textContent=nf(v);q('month'+k+'Remain').textContent=nf(Math.max(0,GUIDE-v))+' VP';q('month'+k+'Pct').textContent=p+'% от ориентира';q('month'+k+'Bar').style.width=Math.min(100,p)+'%';});
  q('motivation').querySelector('span').textContent=all>=GOAL?'Цель 4 000 VP достигнута! Ты выполнила свой план по накопительным очкам.':all>=3000?'Финишная прямая. Осталось совсем немного до 4 000 VP.':all>=2000?'Половина пути позади. Продолжай в своём темпе.':'Большой результат складывается из маленьких ежедневных действий.';
  q('startMonth').value=data.start;q('entriesCount').textContent=active.length+' '+(active.length%10===1&&active.length%100!==11?'запись':([2,3,4].includes(active.length%10)&&![12,13,14].includes(active.length%100)?'записи':'записей'));
  q('date').min=m1+'-01';q('date').max=m2+'-'+String(new Date(+m2.slice(0,4),+m2.slice(5),0).getDate()).padStart(2,'0');
