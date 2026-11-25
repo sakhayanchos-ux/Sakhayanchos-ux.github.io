@@ -1,4 +1,4 @@
-const CACHE='qual-4000-v3';
+const CACHE='qual-4000-v4';
 const FILES=['./','./index.html','./icon.svg','./manifest.webmanifest'];
 self.addEventListener('install',event=>{
  event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(FILES)).then(()=>self.skipWaiting()));
